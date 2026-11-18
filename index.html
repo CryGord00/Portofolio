@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portofolio Dimas Pradhitya: Mahasiswa Informatika UMN yang berfokus pada pengembangan perangkat lunak lintas platform (Mobile, Web, dan Database) serta Application Security.">
+  <title>Dimas Pradhitya | App Developer &amp; Cybersecurity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('portfolio-theme'); } catch (e) {}
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced) {
+        document.documentElement.classList.add('is-preloading');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css?v=20261118f">
+</head>
+<body id="top">
+
+  <!-- Initial Portfolio Loading Screen (Broed-inspired kinetic mask reveal) -->
+  <div id="pageLoader" class="page-loader" role="status" aria-live="polite" aria-label="Memuat portofolio Dimas Pradhitya">
+    <div class="loader-backdrop" aria-hidden="true"></div>
+    <div class="loader-chrome" aria-hidden="true">
+      <div class="loader-top-meta">
+        <span>DIMAS PRADHITYA</span>
+        <span>INFORMATICS</span>
+      </div>
+
+      <div class="loader-kinetic-stage" id="loaderKineticStage">
+        <div class="loader-word" data-loader-word="0">
+          <span class="loader-char is-solid" style="--char-i: 0">M</span>
+          <span class="loader-char is-outline" style="--char-i: 1">O</span>
+          <span class="loader-char is-solid" style="--char-i: 2">B</span>
+          <span class="loader-char is-solid" style="--char-i: 3">I</span>
+          <span class="loader-char is-outline" style="--char-i: 4">L</span>
+          <span class="loader-char is-solid" style="--char-i: 5">E</span>
+        </div>
+        <div class="loader-word" data-loader-word="1">
+          <span class="loader-char is-solid" style="--char-i: 0">S</span>
+          <span class="loader-char is-outline" style="--char-i: 1">E</span>
+          <span class="loader-char is-solid" style="--char-i: 2">C</span>
+          <span class="loader-char is-solid" style="--char-i: 3">U</span>
+          <span class="loader-char is-outline" style="--char-i: 4">R</span>
+          <span class="loader-char is-solid" style="--char-i: 5">E</span>
+        </div>
+        <div class="loader-word loader-word--brand" data-loader-word="2">
+          <span class="loader-char is-solid" style="--char-i: 0">D</span>
+          <span class="loader-char is-outline" style="--char-i: 1">I</span>
+          <span class="loader-char is-solid" style="--char-i: 2">M</span>
+          <span class="loader-char is-outline" style="--char-i: 3">A</span>
+          <span class="loader-char is-solid" style="--char-i: 4">S</span>
+        </div>
+      </div>
+
+      <div class="loader-bottom-meta">
+        <span>PORTOFOLIO</span>
+        <div class="loader-progress-row">
+          <div class="loader-track">
+            <div id="loaderBarFill" class="loader-bar-fill"></div>
+          </div>
+          <span id="loaderPercent" class="loader-percent">00%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+
+  <!-- Sticky Navigation Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand-link">
+        <span class="brand-monogram" aria-hidden="true">
+          <img src="assets/foto-navbar.jpg" alt="" width="30" height="30" decoding="async">
+        </span>
+        <span>Dimas Pradhitya</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navigasi Utama">
+        <ul class="nav-links">
+          <li class="nav-indicator" aria-hidden="true"></li>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#profil">Profil</a></li>
+          <li><a href="#project">Project</a></li>
+          <li><a href="#stack">Stack</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <button id="themeToggleBtn" class="theme-toggle" type="button" aria-label="Ubah mode warna tampilan" aria-pressed="false">
+          <span class="theme-dot" aria-hidden="true"></span>
+          <span id="themeToggleLabel">Terang</span>
+        </button>
+        <button id="mobileMenuBtn" class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNavDrawer">Menu</button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileNavDrawer" class="mobile-drawer" aria-hidden="true">
+      <nav aria-label="Navigasi Mobile">
+        <ul class="mobile-nav-links">
+          <li class="mobile-nav-indicator" aria-hidden="true"></li>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#profil">Profil Formal</a></li>
+          <li><a href="#project">Studi Kasus &amp; Project</a></li>
+          <li><a href="#stack">Tech Stack</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <!-- Hero Section: Name Centerpiece + Interactive Lanyard ID -->
+    <section id="tentang" class="hero">
+      <div class="hero-ambient" aria-hidden="true">
+        <span class="hero-orb hero-orb--a"></span>
+        <span class="hero-orb hero-orb--b"></span>
+      </div>
+
+      <div class="container hero-grid reveal-block is-visible">
+        <div class="hero-intro">
+          <div class="hero-intro-row">
+            <span class="hero-kicker">Halo, Saya</span>
+            <span class="hero-status-chip">Terbuka untuk Magang &amp; Kolaborasi</span>
+          </div>
+
+          <h1 class="hero-name">
+            <span>Dimas</span>
+            <span class="hero-name-accent">Pradhitya.</span>
+          </h1>
+
+          <p class="hero-role-strip">
+            <span>App Developer</span>
+            <span aria-hidden="true">&middot;</span>
+            <span>Mobile Engineer</span>
+            <span aria-hidden="true">&middot;</span>
+            <span>Cybersecurity Enthusiast</span>
+          </p>
+
+          <p class="hero-desc">
+            Mahasiswa Informatika Universitas Multimedia Nusantara (UMN) yang berfokus pada pengembangan perangkat lunak lintas platform (Mobile, Web, dan Database) dengan perhatian khusus pada keamanan aplikasi (Application Security).
+          </p>
+
+          <div class="hero-actions">
+            <a href="#project" class="btn btn-primary">Lihat Project</a>
+            <a href="#cv-slot" class="btn btn-secondary btn-cv">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="8" y1="13" x2="16" y2="13"></line>
+                <line x1="8" y1="17" x2="13" y2="17"></line>
+              </svg>
+              <span>Lihat CV</span>
+            </a>
+            <a href="#kontak" class="btn btn-secondary">Kontak</a>
+          </div>
+
+          <div class="hero-meta-bar">
+            <div class="hero-socials">
+              <span class="hero-socials-label">Temukan Saya</span>
+              <a href="https://github.com/CryGord00" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="GitHub Dimas Pradhitya">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"></path>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/dimas-pradhitya" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="LinkedIn Dimas Pradhitya">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M6.94 8.5H3.56V19.5H6.94V8.5ZM5.25 3.5C4.14 3.5 3.25 4.39 3.25 5.5C3.25 6.6 4.14 7.5 5.25 7.5C6.35 7.5 7.25 6.6 7.25 5.5C7.25 4.39 6.35 3.5 5.25 3.5ZM20.44 13.02C20.44 9.88 18.76 8.22 16.16 8.22C14.38 8.22 13.45 9.2 13 9.93V8.5H9.63C9.68 9.48 9.63 19.5 9.63 19.5H13V13.36C13 13.02 13.02 12.69 13.12 12.45C13.39 11.78 14 11.09 15.04 11.09C16.41 11.09 17.07 12.13 17.07 13.66V19.5H20.44V13.02Z"></path>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/daze06__?cplk=MWtydDF4bGdhaDRzZA==" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="Instagram Dimas Pradhitya">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect>
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+                </svg>
+              </a>
+              <a href="mailto:dimaspradhitya73@gmail.com" class="social-circle" aria-label="Email Dimas Pradhitya">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                  <polyline points="3 7 12 13 21 7"></polyline>
+                </svg>
+              </a>
+            </div>
+            <a href="#profil" class="hero-scroll-cue">
+              <span>Gulir ke perkenalan</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-showcase">
+          <!-- Interactive Lanyard ID Card -->
+          <div class="lanyard-stage" id="lanyardStage">
+            <div class="lanyard-glow" aria-hidden="true"></div>
+            <div class="lanyard-rig" id="lanyardRig">
+              <div class="lanyard-strap-slot" aria-hidden="true">
+                <div class="lanyard-strap-mask">
+                  <div class="lanyard-strap" id="lanyardStrap">
+                    <span class="lanyard-strap-text">DIMAS PRADHITYA</span>
+                  </div>
+                </div>
+              </div>
+              <div class="lanyard-pendant" id="lanyardPendant">
+                <div class="lanyard-buckle" aria-hidden="true"></div>
+                <div class="lanyard-ring" aria-hidden="true"></div>
+
+                <article class="lanyard-card" id="lanyardCard" aria-label="Kartu identitas interaktif Dimas Pradhitya">
+                  <div class="lanyard-sheen" aria-hidden="true"></div>
+                  <div class="lanyard-hole" aria-hidden="true"></div>
+
+                  <div class="lanyard-card-head">
+                    <span class="lanyard-monogram">DIMAS</span>
+                    <span class="lanyard-code">DEV</span>
+                  </div>
+
+                  <div class="lanyard-photo" id="heroPhotoSlot">
+                    <img src="assets/foto-lanyard.jpg" alt="Foto Dimas Pradhitya pada kartu lanyard" width="300" height="375" fetchpriority="high" decoding="async" draggable="false">
+                  </div>
+
+                  <div class="lanyard-card-foot">
+                    <p class="lanyard-role">SOFTWARE ENGINEER &middot; INFORMATICS</p>
+                    <p class="lanyard-name">Dimas Pradhitya</p>
+                    <div class="lanyard-meta-row">
+                      <div class="lanyard-meta-badges">
+                        <span class="lanyard-dept">Informatics</span>
+                        <span class="lanyard-badge">Portfolio</span>
+                      </div>
+                      <svg class="lanyard-barcode" width="68" height="18" viewBox="0 0 68 18" fill="currentColor" aria-hidden="true">
+                        <rect x="0" y="0" width="2" height="18"></rect>
+                        <rect x="4" y="0" width="1" height="18"></rect>
+                        <rect x="7" y="0" width="3" height="18"></rect>
+                        <rect x="12" y="0" width="1" height="18"></rect>
+                        <rect x="16" y="0" width="2" height="18"></rect>
+                        <rect x="20" y="0" width="2" height="18"></rect>
+                        <rect x="24" y="0" width="1" height="18"></rect>
+                        <rect x="28" y="0" width="3" height="18"></rect>
+                        <rect x="33" y="0" width="1" height="18"></rect>
+                        <rect x="36" y="0" width="2" height="18"></rect>
+                        <rect x="40" y="0" width="1" height="18"></rect>
+                        <rect x="43" y="0" width="3" height="18"></rect>
+                        <rect x="48" y="0" width="2" height="18"></rect>
+                        <rect x="52" y="0" width="1" height="18"></rect>
+                        <rect x="55" y="0" width="2" height="18"></rect>
+                        <rect x="59" y="0" width="3" height="18"></rect>
+                        <rect x="64" y="0" width="1" height="18"></rect>
+                        <rect x="66" y="0" width="2" height="18"></rect>
+                      </svg>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <p class="lanyard-hint" aria-hidden="true">Tarik atau gerakkan kursor pada kartu</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01. Experience & Work Approach Editorial Section -->
+    <section id="profil" class="section-band section-band--alt">
+      <div class="container">
+        <div class="section-editorial-head reveal-block">
+          <p class="section-kicker">01 &middot; Pengalaman &amp; Cara Kerja</p>
+          <h2 class="editorial-title">Tentang <span class="editorial-italic">Saya.</span></h2>
+        </div>
+
+        <div class="about-editorial-main">
+          <figure class="about-photo-card reveal-block">
+            <div class="about-photo-frame">
+              <span class="about-photo-index" aria-hidden="true">01</span>
+              <img src="assets/foto-tentang.jpg" alt="Foto formal Dimas Pradhitya mengenakan kemeja putih" width="320" height="400" loading="lazy" decoding="async">
+            </div>
+            <figcaption class="about-photo-caption">
+              <span>Dimas Pradhitya</span>
+              <span class="about-photo-loc">Tangerang &middot; Indonesia</span>
+            </figcaption>
+          </figure>
+
+          <div class="about-editorial-body reveal-block">
+            <div class="about-narrative-grid">
+              <div class="about-narrative-col">
+                <p class="narrative-kicker">Pengalaman &amp; Kolaborasi</p>
+                <h3 class="narrative-lead">Membangun produk nyata dalam tim.</h3>
+                <p class="narrative-text">
+                  Terlibat merancang dan membangun project kolaboratif, mulai dari aplikasi mobile SENORITA, game eksplorasi web Fantasticpart2 bersama Team Fantastic 4, perangkat analisis URL berbahaya, hingga berkontribusi sebagai Committee pada UMN Festival 2025.
+                </p>
+              </div>
+              <div class="about-narrative-col">
+                <p class="narrative-kicker">Praktik Rekayasa</p>
+                <h3 class="narrative-lead">Terstruktur dari desain hingga validasi keamanan.</h3>
+                <p class="narrative-text">
+                  Terbiasa memisahkan state arsitektur MVVM secara rapi pada aplikasi mobile, menjaga konsistensi validasi input serta alur database, dan menguji dasar celah keamanan OWASP Top 10 sebelum fitur dirilis.
+                </p>
+              </div>
+            </div>
+
+            <dl class="about-details-strip">
+              <div class="about-detail-item">
+                <dt>Basis Lokasi</dt>
+                <dd>Tangerang, Indonesia</dd>
+              </div>
+              <div class="about-detail-item">
+                <dt>Bahasa Utama</dt>
+                <dd>Kotlin, JS, C#, SQL</dd>
+              </div>
+              <div class="about-detail-item">
+                <dt>Alur Kolaborasi</dt>
+                <dd>Git &amp; Tim Lintas Peran</dd>
+              </div>
+              <div class="about-detail-item">
+                <dt>Pengalaman Kampus</dt>
+                <dd>Project &amp; Panitia UMN</dd>
+              </div>
+            </dl>
+
+            <!-- Dedicated Web CV Slot (Siap ditautkan file PDF nanti) -->
+            <div id="cv-slot" class="cv-slot-card">
+              <div class="cv-slot-copy">
+                <span class="cv-slot-kicker">Curriculum Vitae &middot; Web Slot</span>
+                <p class="cv-slot-title">Berkas CV Dimas Pradhitya (Segera Hadir)</p>
+                <p class="cv-slot-desc">Penempatan CV khusus di web sudah disiapkan. Tautan PDF akan disambungkan terpisah nanti.</p>
+              </div>
+              <div class="cv-slot-actions">
+                <!-- Ganti tombol di bawah dengan tautan ke PDF saat berkas siap:
+                <a href="cv-dimas-pradhitya.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Buka CV (PDF)</a>
+                -->
+                <button type="button" id="cvStatusBtn" class="btn btn-secondary" aria-expanded="false" aria-controls="cvStatusNotice">Status CV</button>
+                <a href="https://github.com/CryGord00" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Buka GitHub</a>
+              </div>
+              <p id="cvStatusNotice" class="cv-status-notice" hidden>
+                Berkas CV PDF terpisah belum diunggah. Saat file <code>cv-dimas-pradhitya.pdf</code> sudah siap, tombol ini tinggal diarahkan langsung ke file PDF tersebut.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02. UMN Organizations & Certificates Section -->
+    <section id="achievement" class="section-band">
+      <div class="container">
+        <div class="section-editorial-head reveal-block">
+          <div>
+            <p class="section-kicker">02 &middot; Organisasi &amp; Pengalaman Kampus</p>
+            <h2 class="editorial-title">Organisasi <span class="editorial-italic">&amp; Dokumentasi.</span></h2>
+          </div>
+          <p class="section-editorial-sub">Rekam jejak organisasi, kepanitiaan, sertifikat, dan dokumentasi kegiatan selama menempuh studi di Universitas Multimedia Nusantara (klik thumbnail untuk pratinjau).</p>
+        </div>
+
+        <div class="achievement-grid">
+          <article class="achievement-card reveal-block">
+            <button type="button" class="achievement-thumb" data-cert-index="01" data-cert-category="Kepanitiaan UMN" data-cert-title="UMN Festival 2025 (Committee)" data-cert-desc="Certificate of Appreciation atas kontribusi sebagai Committee pada rangkaian acara UMN Festival 2025, Universitas Multimedia Nusantara (Tangerang, 2 Februari 2026).">
+              <img src="assets/sertifikat-umn-festival-2025.jpg" alt="Sertifikat Committee UMN Festival 2025 atas nama Dimas Pradhitya" width="2026" height="1365" loading="lazy" decoding="async">
+            </button>
+            <div class="achievement-body">
+              <span class="achievement-date">Kepanitiaan UMN &middot; 2025</span>
+              <h3 class="achievement-title">UMN Festival 2025</h3>
+              <p class="achievement-issuer">Committee &middot; Universitas Multimedia Nusantara (2 Februari 2026)</p>
+              <span class="achievement-index" aria-hidden="true">01</span>
+            </div>
+          </article>
+
+          <article class="achievement-card reveal-block">
+            <button type="button" class="achievement-thumb" data-cert-index="02" data-cert-category="HMIF · PPIF UMN" data-cert-title="PPIF Informatika UMN 2026 (Member of Module)" data-cert-desc="Certificate of Appreciation atas kontribusi dan partisipasi sebagai Member of Module pada Perkenalan Prodi Informatika (PPIF) UMN 2026 bersama HMIF Universitas Multimedia Nusantara.">
+              <img src="assets/sertifikat-ppif-umn-2026.jpg" alt="Sertifikat Member of Module PPIF Informatika UMN 2026 atas nama Dimas Pradhitya" width="1600" height="1131" loading="lazy" decoding="async">
+            </button>
+            <div class="achievement-body">
+              <span class="achievement-date">HMIF &middot; PPIF UMN 2026</span>
+              <h3 class="achievement-title">Perkenalan Prodi Informatika (PPIF)</h3>
+              <p class="achievement-issuer">Member of Module &middot; HMIF Universitas Multimedia Nusantara</p>
+              <span class="achievement-index" aria-hidden="true">02</span>
+            </div>
+          </article>
+
+          <article class="achievement-card reveal-block">
+            <button type="button" class="achievement-thumb" data-cert-index="03" data-cert-category="Dokumentasi Kegiatan UMN" data-cert-title="FIKOM Night 2025 (Anggota Fresh Money)" data-cert-desc="Dokumentasi kegiatan kepanitiaan FIKOM Night 2025 sebagai anggota Divisi Fresh Money di Universitas Multimedia Nusantara." data-cert-gallery="assets/fikom-night-2025-tim.jpg,assets/fikom-night-2025-booth.jpg">
+              <img class="achievement-thumb-photo--portrait" src="assets/fikom-night-2025-tim.jpg" alt="Dokumentasi tim Divisi Fresh Money pada acara FIKOM Night 2025" width="768" height="1024" loading="lazy" decoding="async">
+            </button>
+            <div class="achievement-body">
+              <span class="achievement-date">Dokumentasi Kegiatan &middot; 2025</span>
+              <h3 class="achievement-title">FIKOM Night 2025</h3>
+              <p class="achievement-issuer">Anggota Divisi Fresh Money &middot; Universitas Multimedia Nusantara</p>
+              <span class="achievement-index" aria-hidden="true">03</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. Projects Section: Flagship Case Studies + Compact Secondary Grid -->
+    <section id="project" class="section-band section-band--alt">
+      <div class="container">
+        <div class="section-editorial-head section-editorial-head--split reveal-block">
+          <div>
+            <p class="section-kicker">03 &middot; Karya Pilihan</p>
+            <h2 class="editorial-title">Studi Kasus <span class="editorial-italic">&amp; Project.</span></h2>
+            <p class="section-subtitle">Penjelasan masalah, arsitektur teknis, serta implementasi nyata yang disertai source code GitHub dan beberapa live demo.</p>
+          </div>
+          <div class="filter-controls">
+            <div class="filter-bar" role="toolbar" aria-label="Saring kategori project">
+              <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">Semua (5)</button>
+              <button type="button" class="filter-btn" data-filter="mobile" aria-pressed="false">Mobile App (2)</button>
+              <button type="button" class="filter-btn" data-filter="cyber" aria-pressed="false">Cybersecurity (1)</button>
+              <button type="button" class="filter-btn" data-filter="game" aria-pressed="false">Game (2)</button>
+            </div>
+            <p id="projectFilterStatus" class="filter-status" aria-live="polite">Menampilkan 5 dari 5 project</p>
+          </div>
+        </div>
+
+        <!-- Flagship Case Studies -->
+        <div class="case-study-list">
+          <!-- Case Study 1: SENORITA -->
+          <article class="case-study reveal-block" data-project-item data-category="mobile">
+            <div class="case-study-content">
+              <div class="case-meta-row">
+                <span class="platform-label">Flagship Mobile App</span>
+                <span class="platform-label">Kotlin / Jetpack Compose</span>
+              </div>
+              <h3 class="case-title">SENORITA: Aplikasi Pemesanan Food &amp; Beverage</h3>
+              <div class="case-breakdown">
+                <p class="case-point"><strong>Masalah:</strong> Pemesanan Dine-In dan Take Away membutuhkan alur pilih cabang, kustomisasi menu, validasi form ketat, dan pelacakan status tanpa state keranjang yang tertukar.</p>
+                <p class="case-point"><strong>Pendekatan Teknis:</strong> Membangun arsitektur MVVM terpisah dengan 6 ViewModel khusus, StateFlow reaktif, serta NavHost dengan pengiriman argumen dinamis antar 15+ layar Compose.</p>
+                <p class="case-point"><strong>Implementasi Nyata:</strong> Sistem validasi input (Email, HP min. 10 digit, OTP 4 digit), tema Material 3 kustom, mockup pemindai QR meja, dan penerbitan struk digital.</p>
+              </div>
+              <ul class="tech-tags" aria-label="Teknologi SENORITA">
+                <li>Kotlin</li>
+                <li>Jetpack Compose</li>
+                <li>Material 3</li>
+                <li>MVVM</li>
+                <li>StateFlow</li>
+                <li>NavHost</li>
+              </ul>
+              <a href="https://github.com/CryGord00/UTS-UAS-MAP-Mobile-Application-Programming-" target="_blank" rel="noopener noreferrer" class="case-link">Lihat Source Code &amp; Dokumentasi SENORITA</a>
+            </div>
+
+            <div class="case-study-visual" aria-label="Diagram arsitektur SENORITA">
+              <div class="visual-head">
+                <p class="visual-caption">Arsitektur Lapisan</p>
+                <span class="visual-meta">MVVM &middot; Compose</span>
+              </div>
+              <ol class="arch-stack">
+                <li class="arch-layer">
+                  <div class="arch-step-rail" aria-hidden="true">
+                    <span class="arch-step">01</span>
+                  </div>
+                  <div class="arch-layer-body">
+                    <div class="arch-layer-head">
+                      <span class="arch-layer-name">Compose UI Layer</span>
+                      <span class="arch-layer-scope">15+ Layar</span>
+                    </div>
+                    <ul class="arch-tokens" aria-label="Layar Compose UI">
+                      <li>MenuList</li>
+                      <li>MenuDetail</li>
+                      <li>ScanQr</li>
+                      <li>Cart</li>
+                      <li>OrderTracking</li>
+                      <li>OnlineReceipt</li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="arch-layer">
+                  <div class="arch-step-rail" aria-hidden="true">
+                    <span class="arch-step">02</span>
+                  </div>
+                  <div class="arch-layer-body">
+                    <div class="arch-layer-head">
+                      <span class="arch-layer-name">ViewModel &amp; StateFlow</span>
+                      <span class="arch-layer-scope">6 ViewModel</span>
+                    </div>
+                    <ul class="arch-tokens" aria-label="ViewModel state">
+                      <li>Auth</li>
+                      <li>Menu</li>
+                      <li>Cart</li>
+                      <li>Order</li>
+                      <li>Rewards</li>
+                      <li>Profile</li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="arch-layer">
+                  <div class="arch-step-rail" aria-hidden="true">
+                    <span class="arch-step">03</span>
+                  </div>
+                  <div class="arch-layer-body">
+                    <div class="arch-layer-head">
+                      <span class="arch-layer-name">Repository &amp; Persistence</span>
+                      <span class="arch-layer-scope">Lokal</span>
+                    </div>
+                    <ul class="arch-tokens" aria-label="Komponen penyimpanan data">
+                      <li>SenoritaRepository</li>
+                      <li>SharedPreferences Manager</li>
+                    </ul>
+                  </div>
+                </li>
+              </ol>
+              <div class="token-section">
+                <div class="token-head">
+                  <span class="token-label">Theme Tokens</span>
+                  <span class="token-system">Material 3</span>
+                </div>
+                <ul class="token-palette" aria-label="Palet token Material 3 SENORITA">
+                  <li class="token-swatch">
+                    <span class="token-dot" style="background-color: #800080;" aria-hidden="true"></span>
+                    <div class="token-meta">
+                      <span class="token-role">Primary</span>
+                      <span class="token-hex">#800080</span>
+                    </div>
+                  </li>
+                  <li class="token-swatch">
+                    <span class="token-dot" style="background-color: #E91E63;" aria-hidden="true"></span>
+                    <div class="token-meta">
+                      <span class="token-role">Secondary</span>
+                      <span class="token-hex">#E91E63</span>
+                    </div>
+                  </li>
+                  <li class="token-swatch">
+                    <span class="token-dot" style="background-color: #FFB300;" aria-hidden="true"></span>
+                    <div class="token-meta">
+                      <span class="token-role">Reward</span>
+                      <span class="token-hex">#FFB300</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Case Study 2: URL Phishing Detector (Reversed Layout) -->
+          <article class="case-study case-study--reversed reveal-block" data-project-item data-category="cyber">
+            <div class="case-study-content">
+              <div class="case-meta-row">
+                <span class="platform-label">Security Web App &middot; PhishGuard AI</span>
+                <span class="platform-label">Python &amp; HTML/CSS/JS</span>
+              </div>
+              <h3 class="case-title">URL Phishing Detector</h3>
+              <div class="case-breakdown">
+                <p class="case-point"><strong>Masalah:</strong> Tautan phishing kerap menyamarkan domain asli lewat panjang path, angka atau tanda hubung berlebih, hingga pemakaian alamat IP mentah untuk mengecoh pengguna.</p>
+                <p class="case-point"><strong>Pendekatan Teknis:</strong> Membangun backend Python (<code>ThreadingHTTPServer</code>) dengan endpoint <code>GET /api/health</code> dan <code>POST /api/predict</code> yang terhubung ke antarmuka web PhishGuard AI (HTML, CSS, JavaScript).</p>
+                <p class="case-point"><strong>Cakupan Fitur:</strong> Mengekstrak 8 fitur leksikal URL (<code>path_length</code>, <code>url_length</code>, <code>num_dots</code>, <code>num_hyphens</code>, <code>num_digits</code>, <code>has_https</code>, <code>has_ip</code>), pengecekan domain tepercaya, serta skor risiko dengan <em>lexical fallback</em> saat model Random Forest tidak dimuat.</p>
+              </div>
+              <ul class="tech-tags" aria-label="Teknologi URL Detector">
+                <li>Python</li>
+                <li>ThreadingHTTPServer</li>
+                <li>HTML / CSS / JS</li>
+                <li>REST API</li>
+                <li>Lexical Analysis</li>
+              </ul>
+              <div class="case-link-row">
+                <a href="https://github.com/CryGord00/Computer-Securty-For-Hosting" target="_blank" rel="noopener noreferrer" class="case-link">Lihat Source Code URL Detector</a>
+                <a href="https://computer-securty.vercel.app" target="_blank" rel="noopener noreferrer" class="case-link">Buka Live Demo (Vercel)</a>
+              </div>
+            </div>
+
+            <div class="case-study-visual" aria-label="Cuplikan antarmuka dan bobot fitur leksikal URL Detector">
+              <div class="project-media-slot project-media-slot--filled">
+                <img src="assets/project-url-detector.jpg" alt="Tampilan antarmuka PhishGuard AI pada URL Phishing Detector" width="1024" height="600" loading="lazy">
+              </div>
+              <div class="visual-head">
+                <p class="visual-caption">Bobot Fitur Deteksi</p>
+                <span class="visual-meta">Data Kode &middot; app.py</span>
+              </div>
+              <ul class="weight-list">
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>path_length</span>
+                    <span>31.3%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 31.3%;"></div></div>
+                </li>
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>url_length</span>
+                    <span>30.4%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 30.4%;"></div></div>
+                </li>
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>num_dots</span>
+                    <span>16.1%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 16.1%;"></div></div>
+                </li>
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>num_digits</span>
+                    <span>14.0%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 14.0%;"></div></div>
+                </li>
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>num_hyphens</span>
+                    <span>7.1%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 7.1%;"></div></div>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Case Study 3: Fantasticpart2 Web Exploration Game -->
+          <article class="case-study reveal-block" data-project-item data-category="game">
+            <div class="case-study-content">
+              <div class="case-meta-row">
+                <span class="platform-label">Web Game &middot; Team Fantastic 4</span>
+                <span class="platform-label">JavaScript / SPA</span>
+              </div>
+              <h3 class="case-title">Fantasticpart2: Game Eksplorasi Kota Berbasis Web</h3>
+              <div class="case-breakdown">
+                <p class="case-point"><strong>Konsep:</strong> Project kolaborasi tim beranggotakan 4 pengembang (Team Fantastic 4) menghadirkan pemilihan karakter dengan kombinasi <em>weakness</em> dan <em>strength</em> unik untuk gaya bermain yang berbeda.</p>
+                <p class="case-point"><strong>Mekanik Permainan:</strong> Pemain menjelajahi berbagai kota sambil mengelola poin status bar yang berkurang sesuai aktivitas; pemain harus mengumpulkan seluruh item di semua kota sebelum salah satu status menyentuh <code>0</code> (<em>game over</em>).</p>
+                <p class="case-point"><strong>Implementasi &amp; Deploy:</strong> Dibangun sebagai aplikasi web SPA dengan JavaScript, CSS, dan HTML serta dikonfigurasi untuk deployment root SPA di Vercel.</p>
+              </div>
+              <ul class="tech-tags" aria-label="Teknologi Fantasticpart2">
+                <li>JavaScript</li>
+                <li>CSS3</li>
+                <li>HTML5</li>
+                <li>Web Game</li>
+                <li>Vercel SPA</li>
+              </ul>
+              <div class="case-link-row">
+                <a href="https://github.com/Revlog15/Fantasticpart2" target="_blank" rel="noopener noreferrer" class="case-link">Lihat Repository GitHub</a>
+                <a href="https://fantasticpart2.vercel.app/login" target="_blank" rel="noopener noreferrer" class="case-link">Buka Live Demo (Vercel)</a>
+              </div>
+            </div>
+
+            <div class="case-study-visual" aria-label="Cuplikan layar dan komposisi kode Fantasticpart2">
+              <div class="project-media-slot project-media-slot--filled">
+                <img src="assets/project-fantasticpart2.png" alt="Tampilan live demo halaman login Fantasticpart2" width="1280" height="800" loading="lazy">
+              </div>
+              <div class="visual-head">
+                <p class="visual-caption">Komposisi Bahasa Kode</p>
+                <span class="visual-meta">GitHub Repo &middot; 4 Kontributor</span>
+              </div>
+              <ul class="weight-list">
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>JavaScript</span>
+                    <span>81.4%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 81.4%;"></div></div>
+                </li>
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>CSS</span>
+                    <span>17.9%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 17.9%;"></div></div>
+                </li>
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>HTML</span>
+                    <span>0.7%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 0.7%; min-width: 4px;"></div></div>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Case Study 4: Hotel Mobile App (Expo / React Native) -->
+          <article class="case-study case-study--reversed reveal-block" data-project-item data-category="mobile">
+            <div class="case-study-content">
+              <div class="case-meta-row">
+                <span class="platform-label">Mobile App &middot; Expo / React Native</span>
+                <span class="platform-label">TypeScript / NativeWind</span>
+              </div>
+              <h3 class="case-title">Hotel Booking &amp; Management: Aplikasi Reservasi Hotel</h3>
+              <div class="case-breakdown">
+                <p class="case-point"><strong>Konsep &amp; Peran:</strong> Project kolaborasi tim beranggotakan 6 pengembang yang membagi alur aplikasi ke tiga zona rute (<code>auth</code>, <code>guest</code>, dan <code>admin</code>) menggunakan navigasi berbasis berkas pada Expo Router.</p>
+                <p class="case-point"><strong>Fitur Utama:</strong> Alur autentikasi (<em>login</em> &amp; <em>register</em>), pencarian dan detail kamar, konfirmasi serta riwayat reservasi tamu, hingga dashboard admin untuk mengelola kamar, reservasi, dan pemindai (<code>expo-camera</code>).</p>
+                <p class="case-point"><strong>Arsitektur Teknis:</strong> Dibangun dengan TypeScript (98.2%), React Native (Expo 54), NativeWind/Tailwind CSS, pemisahan layanan API pada folder <code>services/</code> (<code>api</code>, <code>auth</code>, <code>hotel</code>, <code>booking</code>, <code>admin</code>), dan <code>AsyncStorage</code>.</p>
+              </div>
+              <ul class="tech-tags" aria-label="Teknologi Hotel Mobile App">
+                <li>Expo</li>
+                <li>React Native</li>
+                <li>TypeScript</li>
+                <li>Expo Router</li>
+                <li>NativeWind</li>
+                <li>expo-camera</li>
+              </ul>
+              <a href="https://github.com/codezeros18/hotel" target="_blank" rel="noopener noreferrer" class="case-link">Lihat Repository GitHub</a>
+            </div>
+
+            <div class="case-study-visual" aria-label="Komposisi kode Hotel Mobile App">
+              <div class="visual-head">
+                <p class="visual-caption">Komposisi Bahasa Kode</p>
+                <span class="visual-meta">GitHub Repo &middot; 6 Kontributor</span>
+              </div>
+              <ul class="weight-list">
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>TypeScript</span>
+                    <span>98.2%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 98.2%;"></div></div>
+                </li>
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>JavaScript</span>
+                    <span>1.7%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 1.7%; min-width: 5px;"></div></div>
+                </li>
+                <li class="weight-item">
+                  <div class="weight-label-row">
+                    <span>CSS</span>
+                    <span>0.1%</span>
+                  </div>
+                  <div class="weight-bar-track"><div class="weight-bar-fill" style="width: 0.1%; min-width: 3px;"></div></div>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- Secondary Compact Grid -->
+        <div class="compact-grid">
+          <article class="compact-card reveal-block" data-project-item data-category="game">
+            <div>
+              <div class="case-meta-row">
+                <span class="platform-label">Game Dev / C#</span>
+              </div>
+              <h3>Game Development &amp; Interactive Simulation</h3>
+              <p>Implementasi mekanik kontroler objek, manajemen state permainan, dan pola desain OOP menggunakan C# pada Unity Engine.</p>
+              <ul class="tech-tags" aria-label="Teknologi Game">
+                <li>C#</li>
+                <li>Unity Engine</li>
+                <li>OOP</li>
+              </ul>
+            </div>
+            <a href="https://github.com/CryGord00/Game_Developer-" target="_blank" rel="noopener noreferrer" class="case-link">Lihat Repository Game Dev</a>
+          </article>
+        </div>
+
+        <!-- Empty State (R-27) -->
+        <div id="projectEmptyState" class="empty-state" hidden>
+          <p>Belum ada project yang cocok dengan kategori ini.</p>
+          <button id="resetFilterBtn" type="button" class="btn btn-secondary" style="margin-top: 12px;">Tampilkan Semua Project</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. Categorized Tech Stack Section -->
+    <section id="stack" class="section-band">
+      <div class="container">
+        <div class="section-editorial-head reveal-block">
+          <div>
+            <p class="section-kicker">04 &middot; Kompetensi Teknis</p>
+            <h2 class="editorial-title">Tech <span class="editorial-italic">Stack.</span></h2>
+          </div>
+          <p class="section-editorial-sub">Teknologi yang digunakan langsung pada repository project mobile, web, game, dan analisis keamanan.</p>
+        </div>
+
+        <div class="stack-grid">
+          <div class="stack-domain reveal-block">
+            <h3>Mobile &amp; Game Engineering</h3>
+            <ul class="stack-items">
+              <li>
+                <span class="stack-item-name">Kotlin &amp; Jetpack Compose</span>
+                <span class="stack-item-context">UI deklaratif Material 3, MVVM, StateFlow, dan navigasi layar (SENORITA)</span>
+              </li>
+              <li>
+                <span class="stack-item-name">React Native (Expo) &amp; TypeScript</span>
+                <span class="stack-item-context">Expo Router multi-zona, NativeWind, dan expo-camera (Hotel App)</span>
+              </li>
+              <li>
+                <span class="stack-item-name">C# &amp; Unity Engine</span>
+                <span class="stack-item-context">Game 3D CharacterController, inventori ScriptableObject, dan OOP</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="stack-domain reveal-block">
+            <h3>Web &amp; Backend Integration</h3>
+            <ul class="stack-items">
+              <li>
+                <span class="stack-item-name">JavaScript, HTML5 &amp; CSS3</span>
+                <span class="stack-item-context">Aplikasi web SPA interaktif, game browser, dan UI responsif</span>
+              </li>
+              <li>
+                <span class="stack-item-name">Python &amp; REST API</span>
+                <span class="stack-item-context">Server ThreadingHTTPServer dan endpoint analisis URL JSON</span>
+              </li>
+              <li>
+                <span class="stack-item-name">Database &amp; Penyimpanan Lokal</span>
+                <span class="stack-item-context">Integrasi Supabase serta persistensi AsyncStorage dan SharedPreferences</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="stack-domain reveal-block">
+            <h3>Security &amp; Dev Tooling</h3>
+            <ul class="stack-items">
+              <li>
+                <span class="stack-item-name">URL Phishing &amp; Risk Analysis</span>
+                <span class="stack-item-context">Ekstraksi 8 fitur leksikal URL, skor risiko, dan deteksi HTTPS/IP</span>
+              </li>
+              <li>
+                <span class="stack-item-name">Validasi Input &amp; Autentikasi</span>
+                <span class="stack-item-context">Validasi formulir ketat, pemisahan akses rute, dan dasar OWASP Top 10</span>
+              </li>
+              <li>
+                <span class="stack-item-name">Git, GitHub &amp; Vercel</span>
+                <span class="stack-item-context">Kolaborasi tim lintas kontributor dan deployment live demo</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. Closing Collaboration & Contact Band -->
+    <section id="kontak" class="section-band section-band--alt">
+      <div class="container">
+        <div class="section-editorial-head reveal-block">
+          <div>
+            <p class="section-kicker">05 &middot; Kolaborasi</p>
+            <h2 class="editorial-title">Kontak <span class="editorial-italic">&amp; Profil.</span></h2>
+          </div>
+          <p class="section-editorial-sub">Hubungi untuk peluang magang, kolaborasi project, atau diskusi teknis.</p>
+        </div>
+
+        <div class="closing-grid reveal-block">
+          <div class="edu-panel">
+            <div>
+              <h3 class="panel-heading">Kolaborasi &amp; Rekrutmen</h3>
+              <p class="edu-focus">
+                Tertarik mendiskusikan kesempatan magang, posisi junior developer, atau meninjau detail teknis dari aplikasi SENORITA dan perangkat analisis keamanan? Silakan hubungi saya langsung melalui email, WhatsApp, atau tautan kontak di samping.
+              </p>
+            </div>
+            <div class="contact-actions">
+              <a href="mailto:dimaspradhitya73@gmail.com" class="btn btn-primary">Kirim Email Langsung</a>
+              <a href="https://wa.me/6285162895078" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Chat WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="contact-panel">
+            <h3 class="panel-heading">Tautan Langsung</h3>
+            <p class="section-subtitle" style="margin-bottom: 16px;">Saluran aktif untuk komunikasi dan peninjauan kode.</p>
+            <ul class="contact-list">
+              <li class="contact-row">
+                <span class="contact-label">GitHub</span>
+                <a href="https://github.com/CryGord00" target="_blank" rel="noopener noreferrer">github.com/CryGord00</a>
+              </li>
+              <li class="contact-row">
+                <span class="contact-label">Email</span>
+                <a href="mailto:dimaspradhitya73@gmail.com">dimaspradhitya73@gmail.com</a>
+              </li>
+              <li class="contact-row">
+                <span class="contact-label">WhatsApp</span>
+                <a href="https://wa.me/6285162895078" target="_blank" rel="noopener noreferrer">wa.me/6285162895078</a>
+              </li>
+              <li class="contact-row">
+                <span class="contact-label">LinkedIn</span>
+                <a href="https://www.linkedin.com/in/dimas-pradhitya" target="_blank" rel="noopener noreferrer">linkedin.com/in/dimas-pradhitya</a>
+              </li>
+              <li class="contact-row">
+                <span class="contact-label">Instagram</span>
+                <a href="https://www.instagram.com/daze06__?cplk=MWtydDF4bGdhaDRzZA==" target="_blank" rel="noopener noreferrer">instagram.com/daze06__</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Dimas Pradhitya</p>
+      <a href="#top" class="footer-top-link">Kembali ke atas</a>
+    </div>
+  </footer>
+
+  <!-- Accessible Certificate Preview Modal -->
+  <dialog id="certModal" class="cert-modal" aria-labelledby="certModalTitle">
+    <div class="cert-modal-surface">
+      <div class="cert-modal-head">
+        <div>
+          <span id="certModalMeta" class="cert-modal-kicker">Sertifikat</span>
+          <h3 id="certModalTitle" class="cert-modal-title">Pratinjau Sertifikat</h3>
+        </div>
+        <button type="button" id="certModalClose" class="btn btn-secondary cert-modal-close" aria-label="Tutup pratinjau">Tutup</button>
+      </div>
+      <div id="certModalStage" class="cert-modal-stage"></div>
+      <p id="certModalDesc" class="cert-modal-desc"></p>
+    </div>
+  </dialog>
+
+  <script src="js/ThemeController.js?v=20261117r" defer></script>
+  <script src="js/ScrollRevealManager.js?v=20261117r" defer></script>
+  <script src="js/ProjectFilterController.js?v=20261117r" defer></script>
+  <script src="js/NavigationController.js?v=20261117r" defer></script>
+  <script src="js/LanyardController.js?v=20261117r" defer></script>
+  <script src="js/PageLoaderController.js?v=20261117r" defer></script>
+  <script src="js/ProfileWidgetsController.js?v=20261118a" defer></script>
+  <script src="script.js?v=20261117r" defer></script>
+</body>
+</html>

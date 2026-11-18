@@ -1,0 +1,8 @@
+# Vercel local link metadata
+.vercel
+
+# OS and editor metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
