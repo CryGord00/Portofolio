@@ -246,26 +246,15 @@ html.is-preloading .page-loader,
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-.loader-top-meta,
-.loader-bottom-meta {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(220, 234, 254, 0.76);
+  justify-content: center;
+  gap: clamp(20px, 3vw, 30px);
 }
 
 .loader-kinetic-stage {
   position: relative;
   width: 100%;
-  height: clamp(86px, 16vw, 176px);
+  height: clamp(68px, 11vw, 132px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -277,12 +266,12 @@ html.is-preloading .page-loader,
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.025em;
+  gap: 0.04em;
   font-family: "Barlow Condensed", "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
-  font-size: clamp(4.2rem, 15vw, 11.2rem);
-  line-height: 0.88;
-  letter-spacing: -0.015em;
+  font-size: clamp(3.6rem, 11vw, 8.2rem);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   user-select: none;
 }
@@ -293,9 +282,9 @@ html.is-preloading .page-loader,
   transform: translateY(24%);
   will-change: clip-path, transform;
   transition:
-    clip-path 0.19s cubic-bezier(0.76, 0, 0.24, 1),
-    transform 0.19s cubic-bezier(0.76, 0, 0.24, 1);
-  transition-delay: calc(var(--char-i, 0) * 18ms);
+    clip-path 0.2s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.2s cubic-bezier(0.76, 0, 0.24, 1);
+  transition-delay: calc(var(--char-i, 0) * 24ms);
 }
 
 .loader-char.is-solid {
@@ -321,22 +310,16 @@ html.is-preloading .page-loader,
   transform: translateY(0%);
 }
 
-.loader-word.is-out .loader-char {
-  clip-path: inset(100% 0 0 0);
-  transform: translateY(-22%);
-  transition-delay: calc(var(--char-i, 0) * 16ms);
-}
-
 .loader-progress-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-width: min(220px, 46vw);
+  justify-content: center;
+  width: min(260px, 68vw);
 }
 
 .loader-track {
   flex: 1;
-  height: 2px;
+  height: 3px;
   border-radius: var(--radius-pill);
   background-color: rgba(220, 234, 254, 0.24);
   overflow: hidden;
@@ -348,15 +331,6 @@ html.is-preloading .page-loader,
   border-radius: var(--radius-pill);
   background-color: #FFFFFF;
   transition: width 0.08s linear;
-}
-
-.loader-percent {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: #E8F1FF;
-  min-width: 34px;
-  text-align: right;
 }
 
 html.is-preloading .lanyard-rig,

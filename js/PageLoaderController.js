@@ -15,8 +15,8 @@
       this.reducedMotion = Boolean(options.reducedMotion);
       this.onCurtainOpening = options.onCurtainOpening || null;
 
-      this.minMs = options.minMs || 1850;
-      this.maxMs = options.maxMs || 2400;
+      this.minMs = options.minMs || 950;
+      this.maxMs = options.maxMs || 1500;
       this.assetsReady = document.readyState === 'complete';
       this.progress = 8;
       this.dismissed = false;
@@ -31,25 +31,13 @@
 
       if (stage === 0) {
         this.words[0].classList.add('is-in');
-      } else if (stage === 1) {
-        this.words[0].classList.remove('is-in');
-        this.words[0].classList.add('is-out');
-      } else if (stage === 2) {
-        if (this.words[1]) this.words[1].classList.add('is-in');
-      } else if (stage === 3) {
-        if (this.words[1]) {
-          this.words[1].classList.remove('is-in');
-          this.words[1].classList.add('is-out');
-        }
-      } else if (stage === 4) {
-        if (this.words[2]) this.words[2].classList.add('is-in');
       }
     }
 
     dismiss() {
       if (this.dismissed || !this.loaderEl) return;
       this.dismissed = true;
-      this.setStage(4);
+      this.setStage(0);
       if (this.barFillEl) this.barFillEl.style.width = '100%';
       if (this.percentEl) this.percentEl.textContent = '100%';
 
@@ -72,15 +60,7 @@
       if (this.dismissed) return;
       const elapsed = now - this.startTime;
 
-      if (elapsed >= 1420) {
-        this.setStage(4);
-      } else if (elapsed >= 1120) {
-        this.setStage(3);
-      } else if (elapsed >= 720) {
-        this.setStage(2);
-      } else if (elapsed >= 420) {
-        this.setStage(1);
-      } else if (elapsed >= 30) {
+      if (elapsed >= 30) {
         this.setStage(0);
       }
 
