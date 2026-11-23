@@ -314,7 +314,8 @@ html.is-preloading .page-loader,
   display: flex;
   align-items: center;
   justify-content: center;
-  width: min(260px, 68vw);
+  gap: 12px;
+  width: min(300px, 76vw);
 }
 
 .loader-track {
@@ -331,6 +332,17 @@ html.is-preloading .page-loader,
   border-radius: var(--radius-pill);
   background-color: #FFFFFF;
   transition: width 0.08s linear;
+}
+
+.loader-percent {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: #E8F1FF;
+  min-width: 38px;
+  text-align: right;
 }
 
 html.is-preloading .lanyard-rig,
