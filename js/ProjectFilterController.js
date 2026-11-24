@@ -14,9 +14,27 @@
       this.emptyStateEl = document.getElementById(options.emptyStateId);
       this.resetButton = document.getElementById(options.resetButtonId);
       this.onAfterFilter = options.onAfterFilter || null;
+      this.currentCategory = 'all';
+      this.lang = options.lang || 'id';
+    }
+
+    formatStatus(visibleCount, totalCount) {
+      if (this.lang === 'en') {
+        return 'Showing ' + visibleCount + ' of ' + totalCount + ' projects';
+      }
+      return 'Menampilkan ' + visibleCount + ' dari ' + totalCount + ' project';
+    }
+
+    setLanguage(lang) {
+      this.lang = lang === 'en' ? 'en' : 'id';
+      const visibleCount = this.items.filter((item) => !item.classList.contains('hidden')).length;
+      if (this.statusEl) {
+        this.statusEl.textContent = this.formatStatus(visibleCount, this.items.length);
+      }
     }
 
     apply(category) {
+      this.currentCategory = category;
       let visibleCount = 0;
 
       this.buttons.forEach((btn) => {
@@ -38,7 +56,7 @@
       });
 
       if (this.statusEl) {
-        this.statusEl.textContent = 'Menampilkan ' + visibleCount + ' dari ' + this.items.length + ' project';
+        this.statusEl.textContent = this.formatStatus(visibleCount, this.items.length);
       }
 
       if (this.emptyStateEl) {

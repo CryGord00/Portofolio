@@ -406,7 +406,7 @@ html.is-preloading .lanyard-hint,
   position: relative;
   overflow: hidden;
   pointer-events: auto;
-  max-width: 792px;
+  max-width: 856px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -428,7 +428,7 @@ html.is-preloading .lanyard-hint,
 }
 
 .site-header.is-scrolled .header-inner {
-  max-width: 752px;
+  max-width: 816px;
   background: var(--liquid-glass-bg-scrolled);
   box-shadow: var(--liquid-glass-shadow-scrolled);
 }
@@ -603,6 +603,7 @@ html.is-preloading .lanyard-hint,
   gap: 6px;
 }
 
+.lang-toggle,
 .theme-toggle,
 .menu-toggle {
   background-color: var(--liquid-chip-bg);
@@ -619,8 +620,33 @@ html.is-preloading .lanyard-hint,
   align-items: center;
   justify-content: center;
   gap: 7px;
+  white-space: nowrap;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08), inset 0 1px 0 var(--liquid-pill-highlight);
   transition: background-color 0.22s ease, border-color 0.22s ease, transform 0.15s ease;
+}
+
+.lang-toggle {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  padding: 8px 12px;
+  gap: 4px;
+}
+
+.lang-opt {
+  opacity: 0.46;
+  font-weight: 500;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.lang-opt.is-active {
+  opacity: 1;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.lang-sep {
+  opacity: 0.34;
 }
 
 .theme-dot {
@@ -632,6 +658,7 @@ html.is-preloading .lanyard-hint,
   transition: background-color 0.25s ease;
 }
 
+.lang-toggle:hover,
 .theme-toggle:hover,
 .menu-toggle:hover {
   background-color: var(--liquid-chip-hover);
@@ -2726,14 +2753,32 @@ html.is-preloading .lanyard-hint,
   }
 
   .header-inner {
-    padding: 5px 6px 5px 10px;
+    padding: 5px 6px 5px 8px;
+    gap: 6px;
     border-radius: var(--radius-pill);
   }
 
+  .brand-link {
+    gap: 7px;
+    font-size: 0.82rem;
+  }
+
+  .header-controls {
+    gap: 4px;
+  }
+
+  .lang-toggle,
   .theme-toggle,
   .menu-toggle {
-    padding: 8px 12px;
-    font-size: 0.8rem;
+    padding: 8px 9px;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+
+  .lang-toggle {
+    font-size: 0.72rem;
+    padding: 8px 8px;
+    gap: 3px;
   }
 
   .container {

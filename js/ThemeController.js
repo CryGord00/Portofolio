@@ -12,6 +12,7 @@
       this.label = document.getElementById(options.labelId);
       this.storageKey = options.storageKey || 'portfolio-theme';
       this.root = document.documentElement;
+      this.lang = options.lang || 'id';
     }
 
     getInitialTheme() {
@@ -26,6 +27,12 @@
       return saved || (prefersDark ? 'dark' : 'light');
     }
 
+    setLanguage(lang) {
+      this.lang = lang === 'en' ? 'en' : 'id';
+      const isDark = this.root.getAttribute('data-theme') === 'dark';
+      this.apply(isDark ? 'dark' : 'light');
+    }
+
     apply(theme) {
       const isDark = theme === 'dark';
       if (isDark) {
@@ -34,10 +41,18 @@
         this.root.removeAttribute('data-theme');
       }
       if (this.label) {
-        this.label.textContent = isDark ? 'Gelap' : 'Terang';
+        if (this.lang === 'en') {
+          this.label.textContent = isDark ? 'Dark' : 'Light';
+        } else {
+          this.label.textContent = isDark ? 'Gelap' : 'Terang';
+        }
       }
       if (this.button) {
         this.button.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        this.button.setAttribute(
+          'aria-label',
+          this.lang === 'en' ? 'Toggle color theme' : 'Ubah mode warna tampilan'
+        );
       }
     }
 

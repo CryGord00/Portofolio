@@ -16,13 +16,27 @@
       if (saved === 'dark' || (!saved && prefersDark)) {
         document.documentElement.setAttribute('data-theme', 'dark');
       }
+      var initLang = null;
+      try {
+        var qsLang = new URLSearchParams(window.location.search).get('lang');
+        if (qsLang === 'en' || qsLang === 'id') initLang = qsLang;
+      } catch (e) {}
+      if (!initLang) {
+        try {
+          var savedLang = localStorage.getItem('portfolio-lang');
+          if (savedLang === 'en' || savedLang === 'id') initLang = savedLang;
+        } catch (e) {}
+      }
+      if (initLang) {
+        document.documentElement.setAttribute('lang', initLang);
+      }
       var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced) {
         document.documentElement.classList.add('is-preloading');
       }
     })();
   </script>
-  <link rel="stylesheet" href="style.css?v=20261124a">
+  <link rel="stylesheet" href="style.css?v=20261124b">
 </head>
 <body id="top">
 
@@ -51,7 +65,7 @@
     </div>
   </div>
 
-  <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+  <a href="#main-content" class="skip-link" data-i18n="skipLink">Lewati ke konten utama</a>
 
   <!-- Sticky Navigation Header -->
   <header class="site-header">
@@ -66,15 +80,20 @@
       <nav class="desktop-nav" aria-label="Navigasi Utama">
         <ul class="nav-links">
           <li class="nav-indicator" aria-hidden="true"></li>
-          <li><a href="#tentang">Tentang</a></li>
-          <li><a href="#profil">Profil</a></li>
-          <li><a href="#project">Project</a></li>
-          <li><a href="#stack">Stack</a></li>
-          <li><a href="#kontak">Kontak</a></li>
+          <li><a href="#tentang" data-i18n="navAbout">Tentang</a></li>
+          <li><a href="#profil" data-i18n="navProfile">Profil</a></li>
+          <li><a href="#project" data-i18n="navProjects">Project</a></li>
+          <li><a href="#stack" data-i18n="navStack">Stack</a></li>
+          <li><a href="#kontak" data-i18n="navContact">Kontak</a></li>
         </ul>
       </nav>
 
       <div class="header-controls">
+        <button id="langToggleBtn" class="lang-toggle" type="button" aria-label="Ganti bahasa ke Inggris" title="ID / EN" data-active-lang="id">
+          <span class="lang-opt is-active" data-lang-opt="id">ID</span>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <span class="lang-opt" data-lang-opt="en">EN</span>
+        </button>
         <button id="themeToggleBtn" class="theme-toggle" type="button" aria-label="Ubah mode warna tampilan" aria-pressed="false">
           <span class="theme-dot" aria-hidden="true"></span>
           <span id="themeToggleLabel">Terang</span>
@@ -88,11 +107,11 @@
       <nav aria-label="Navigasi Mobile">
         <ul class="mobile-nav-links">
           <li class="mobile-nav-indicator" aria-hidden="true"></li>
-          <li><a href="#tentang">Tentang</a></li>
-          <li><a href="#profil">Profil Formal</a></li>
-          <li><a href="#project">Studi Kasus &amp; Project</a></li>
-          <li><a href="#stack">Tech Stack</a></li>
-          <li><a href="#kontak">Kontak</a></li>
+          <li><a href="#tentang" data-i18n="navAbout">Tentang</a></li>
+          <li><a href="#profil" data-i18n="mobileNavProfile">Profil Formal</a></li>
+          <li><a href="#project" data-i18n="mobileNavProjects">Studi Kasus &amp; Project</a></li>
+          <li><a href="#stack" data-i18n="mobileNavStack">Tech Stack</a></li>
+          <li><a href="#kontak" data-i18n="navContact">Kontak</a></li>
         </ul>
       </nav>
     </div>
@@ -109,8 +128,8 @@
       <div class="container hero-grid reveal-block is-visible">
         <div class="hero-intro">
           <div class="hero-intro-row">
-            <span class="hero-kicker">Halo, Saya</span>
-            <span class="hero-status-chip">Terbuka untuk Magang &amp; Kolaborasi</span>
+            <span class="hero-kicker" data-i18n="heroKicker">Halo, Saya</span>
+            <span class="hero-status-chip" data-i18n="heroStatus">Terbuka untuk Magang &amp; Kolaborasi</span>
           </div>
 
           <h1 class="hero-name">
@@ -126,12 +145,12 @@
             <span>Cybersecurity Enthusiast</span>
           </p>
 
-          <p class="hero-desc">
+          <p class="hero-desc" data-i18n="heroDesc">
             Mahasiswa Informatika Universitas Multimedia Nusantara (UMN) yang berfokus pada pengembangan perangkat lunak lintas platform (Mobile, Web, dan Database) dengan perhatian khusus pada keamanan aplikasi (Application Security).
           </p>
 
           <div class="hero-actions">
-            <a href="#project" class="btn btn-primary">Lihat Project</a>
+            <a href="#project" class="btn btn-primary" data-i18n="heroBtnProjects">Lihat Project</a>
             <a href="#cv-slot" class="btn btn-secondary btn-cv">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -139,14 +158,14 @@
                 <line x1="8" y1="13" x2="16" y2="13"></line>
                 <line x1="8" y1="17" x2="13" y2="17"></line>
               </svg>
-              <span>Lihat CV</span>
+              <span data-i18n="heroBtnCv">Lihat CV</span>
             </a>
-            <a href="#kontak" class="btn btn-secondary">Kontak</a>
+            <a href="#kontak" class="btn btn-secondary" data-i18n="heroBtnContact">Kontak</a>
           </div>
 
           <div class="hero-meta-bar">
             <div class="hero-socials">
-              <span class="hero-socials-label">Temukan Saya</span>
+              <span class="hero-socials-label" data-i18n="heroFindMe">Temukan Saya</span>
               <a href="https://github.com/CryGord00" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="GitHub Dimas Pradhitya">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"></path>
@@ -172,7 +191,7 @@
               </a>
             </div>
             <a href="#profil" class="hero-scroll-cue">
-              <span>Gulir ke perkenalan</span>
+              <span data-i18n="heroScrollCue">Gulir ke perkenalan</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <polyline points="19 12 12 19 5 12"></polyline>
@@ -243,7 +262,7 @@
                 </article>
               </div>
             </div>
-            <p class="lanyard-hint" aria-hidden="true">Tarik atau gerakkan kursor pada kartu</p>
+            <p class="lanyard-hint" aria-hidden="true" data-i18n="lanyardHint">Tarik atau gerakkan kursor pada kartu</p>
           </div>
         </div>
       </div>
@@ -253,8 +272,8 @@
     <section id="profil" class="section-band section-band--alt">
       <div class="container">
         <div class="section-editorial-head reveal-block">
-          <p class="section-kicker">01 &middot; Pengalaman &amp; Cara Kerja</p>
-          <h2 class="editorial-title">Tentang <span class="editorial-italic">Saya.</span></h2>
+          <p class="section-kicker" data-i18n="profileKicker">01 &middot; Pengalaman &amp; Cara Kerja</p>
+          <h2 class="editorial-title" data-i18n-html="profileTitleHtml">Tentang <span class="editorial-italic">Saya.</span></h2>
         </div>
 
         <div class="about-editorial-main">
@@ -272,16 +291,16 @@
           <div class="about-editorial-body reveal-block">
             <div class="about-narrative-grid">
               <div class="about-narrative-col">
-                <p class="narrative-kicker">Pengalaman &amp; Kolaborasi</p>
-                <h3 class="narrative-lead">Membangun produk nyata dalam tim.</h3>
-                <p class="narrative-text">
+                <p class="narrative-kicker" data-i18n="aboutExpKicker">Pengalaman &amp; Kolaborasi</p>
+                <h3 class="narrative-lead" data-i18n="aboutExpLead">Membangun produk nyata dalam tim.</h3>
+                <p class="narrative-text" data-i18n="aboutExpText">
                   Terlibat merancang dan membangun project kolaboratif, mulai dari aplikasi mobile SENORITA, game eksplorasi web Fantasticpart2 bersama Team Fantastic 4, perangkat analisis URL berbahaya, hingga berkontribusi sebagai Committee pada UMN Festival 2025.
                 </p>
               </div>
               <div class="about-narrative-col">
-                <p class="narrative-kicker">Praktik Rekayasa</p>
-                <h3 class="narrative-lead">Terstruktur dari desain hingga validasi keamanan.</h3>
-                <p class="narrative-text">
+                <p class="narrative-kicker" data-i18n="aboutEngKicker">Praktik Rekayasa</p>
+                <h3 class="narrative-lead" data-i18n="aboutEngLead">Terstruktur dari desain hingga validasi keamanan.</h3>
+                <p class="narrative-text" data-i18n="aboutEngText">
                   Terbiasa memisahkan state arsitektur MVVM secara rapi pada aplikasi mobile, menjaga konsistensi validasi input serta alur database, dan menguji dasar celah keamanan OWASP Top 10 sebelum fitur dirilis.
                 </p>
               </div>
@@ -289,33 +308,33 @@
 
             <dl class="about-details-strip">
               <div class="about-detail-item">
-                <dt>Basis Lokasi</dt>
-                <dd>Tangerang, Indonesia</dd>
+                <dt data-i18n="detailLocLabel">Basis Lokasi</dt>
+                <dd data-i18n="detailLocValue">Tangerang, Indonesia</dd>
               </div>
               <div class="about-detail-item">
-                <dt>Bahasa Utama</dt>
-                <dd>Kotlin, JS, C#, SQL</dd>
+                <dt data-i18n="detailLangLabel">Bahasa Utama</dt>
+                <dd data-i18n="detailLangValue">Kotlin, JS, C#, SQL</dd>
               </div>
               <div class="about-detail-item">
-                <dt>Alur Kolaborasi</dt>
-                <dd>Git &amp; Tim Lintas Peran</dd>
+                <dt data-i18n="detailCollabLabel">Alur Kolaborasi</dt>
+                <dd data-i18n="detailCollabValue">Git &amp; Tim Lintas Peran</dd>
               </div>
               <div class="about-detail-item">
-                <dt>Pengalaman Kampus</dt>
-                <dd>Project &amp; Panitia UMN</dd>
+                <dt data-i18n="detailCampusLabel">Pengalaman Kampus</dt>
+                <dd data-i18n="detailCampusValue">Project &amp; Panitia UMN</dd>
               </div>
             </dl>
 
             <!-- Dedicated Web CV Slot -->
             <div id="cv-slot" class="cv-slot-card">
               <div class="cv-slot-copy">
-                <span class="cv-slot-kicker">Curriculum Vitae &middot; PDF</span>
-                <p class="cv-slot-title">Curriculum Vitae Dimas Pradhitya</p>
-                <p class="cv-slot-desc">Ringkasan pendidikan, pengalaman kepanitiaan, project teknis, dan keahlian utama dalam format PDF siap baca maupun unduh.</p>
+                <span class="cv-slot-kicker" data-i18n="cvKicker">Curriculum Vitae &middot; PDF</span>
+                <p class="cv-slot-title" data-i18n="cvTitle">Curriculum Vitae Dimas Pradhitya</p>
+                <p class="cv-slot-desc" data-i18n="cvDesc">Ringkasan pendidikan, pengalaman kepanitiaan, project teknis, dan keahlian utama dalam format PDF siap baca maupun unduh.</p>
               </div>
               <div class="cv-slot-actions">
-                <a href="assets/cv-dimas-pradhitya.pdf?v=20261123b" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Buka CV (PDF)</a>
-                <a href="assets/cv-dimas-pradhitya.pdf?v=20261123b" download="CV-Dimas-Pradhitya.pdf" class="btn btn-secondary">Unduh PDF</a>
+                <a href="assets/cv-dimas-pradhitya.pdf?v=20261123b" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-i18n="cvBtnOpen">Buka CV (PDF)</a>
+                <a href="assets/cv-dimas-pradhitya.pdf?v=20261123b" download="CV-Dimas-Pradhitya.pdf" class="btn btn-secondary" data-i18n="cvBtnDownload">Unduh PDF</a>
               </div>
             </div>
           </div>
@@ -328,10 +347,10 @@
       <div class="container">
         <div class="section-editorial-head reveal-block">
           <div>
-            <p class="section-kicker">02 &middot; Organisasi &amp; Pengalaman Kampus</p>
-            <h2 class="editorial-title">Organisasi<span class="editorial-italic">.</span></h2>
+            <p class="section-kicker" data-i18n="orgKicker">02 &middot; Organisasi &amp; Pengalaman Kampus</p>
+            <h2 class="editorial-title" data-i18n-html="orgTitleHtml">Organisasi<span class="editorial-italic">.</span></h2>
           </div>
-          <p class="section-editorial-sub">Rekam jejak organisasi, kepanitiaan, dan sertifikat kegiatan selama menempuh studi di Universitas Multimedia Nusantara (klik sertifikat untuk pratinjau).</p>
+          <p class="section-editorial-sub" data-i18n="orgSub">Rekam jejak organisasi, kepanitiaan, dan sertifikat kegiatan selama menempuh studi di Universitas Multimedia Nusantara (klik sertifikat untuk pratinjau).</p>
         </div>
 
         <div class="achievement-grid">
@@ -340,9 +359,9 @@
               <img src="assets/sertifikat-umn-festival-2025.jpg" alt="Sertifikat Committee UMN Festival 2025 atas nama Dimas Pradhitya" width="2026" height="1365" loading="lazy" decoding="async">
             </button>
             <div class="achievement-body">
-              <span class="achievement-date">Kepanitiaan UMN &middot; 2025</span>
-              <h3 class="achievement-title">UMN Festival 2025</h3>
-              <p class="achievement-issuer">Committee &middot; Universitas Multimedia Nusantara (2 Februari 2026)</p>
+              <span class="achievement-date" data-i18n="org1Date">Kepanitiaan UMN &middot; 2025</span>
+              <h3 class="achievement-title" data-i18n="org1Title">UMN Festival 2025</h3>
+              <p class="achievement-issuer" data-i18n="org1Issuer">Committee &middot; Universitas Multimedia Nusantara (2 Februari 2026)</p>
               <span class="achievement-index" aria-hidden="true">01</span>
             </div>
           </article>
@@ -352,9 +371,9 @@
               <img src="assets/sertifikat-ppif-umn-2026.jpg" alt="Sertifikat Member of Module PPIF Informatika UMN 2026 atas nama Dimas Pradhitya" width="1600" height="1131" loading="lazy" decoding="async">
             </button>
             <div class="achievement-body">
-              <span class="achievement-date">HMIF &middot; PPIF UMN 2026</span>
-              <h3 class="achievement-title">Perkenalan Prodi Informatika (PPIF)</h3>
-              <p class="achievement-issuer">Member of Module &middot; HMIF Universitas Multimedia Nusantara</p>
+              <span class="achievement-date" data-i18n="org2Date">HMIF &middot; PPIF UMN 2026</span>
+              <h3 class="achievement-title" data-i18n="org2Title">Perkenalan Prodi Informatika (PPIF)</h3>
+              <p class="achievement-issuer" data-i18n="org2Issuer">Member of Module &middot; HMIF Universitas Multimedia Nusantara</p>
               <span class="achievement-index" aria-hidden="true">02</span>
             </div>
           </article>
@@ -367,16 +386,16 @@
       <div class="container">
         <div class="section-editorial-head section-editorial-head--split reveal-block">
           <div>
-            <p class="section-kicker">03 &middot; Karya Pilihan</p>
-            <h2 class="editorial-title">Studi Kasus <span class="editorial-italic">&amp; Project.</span></h2>
-            <p class="section-subtitle">Penjelasan masalah, arsitektur teknis, serta implementasi nyata yang disertai source code GitHub dan beberapa live demo.</p>
+            <p class="section-kicker" data-i18n="projKicker">03 &middot; Karya Pilihan</p>
+            <h2 class="editorial-title" data-i18n-html="projTitleHtml">Studi Kasus <span class="editorial-italic">&amp; Project.</span></h2>
+            <p class="section-subtitle" data-i18n="projSub">Penjelasan masalah, arsitektur teknis, serta implementasi nyata yang disertai source code GitHub dan beberapa live demo.</p>
           </div>
           <div class="filter-controls">
             <div class="filter-bar" role="toolbar" aria-label="Saring kategori project">
-              <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">Semua (5)</button>
-              <button type="button" class="filter-btn" data-filter="mobile" aria-pressed="false">Mobile App (2)</button>
-              <button type="button" class="filter-btn" data-filter="cyber" aria-pressed="false">Cybersecurity (1)</button>
-              <button type="button" class="filter-btn" data-filter="game" aria-pressed="false">Game (2)</button>
+              <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true" data-i18n="filterAll">Semua (5)</button>
+              <button type="button" class="filter-btn" data-filter="mobile" aria-pressed="false" data-i18n="filterMobile">Mobile App (2)</button>
+              <button type="button" class="filter-btn" data-filter="cyber" aria-pressed="false" data-i18n="filterCyber">Cybersecurity (1)</button>
+              <button type="button" class="filter-btn" data-filter="game" aria-pressed="false" data-i18n="filterGame">Game (2)</button>
             </div>
             <p id="projectFilterStatus" class="filter-status" aria-live="polite">Menampilkan 5 dari 5 project</p>
           </div>
@@ -391,11 +410,11 @@
                 <span class="platform-label">Flagship Mobile App</span>
                 <span class="platform-label">Kotlin / Jetpack Compose</span>
               </div>
-              <h3 class="case-title">SENORITA: Aplikasi Pemesanan Food &amp; Beverage</h3>
+              <h3 class="case-title" data-i18n="senoritaTitle">SENORITA: Aplikasi Pemesanan Food &amp; Beverage</h3>
               <div class="case-breakdown">
-                <p class="case-point"><strong>Masalah:</strong> Pemesanan Dine-In dan Take Away membutuhkan alur pilih cabang, kustomisasi menu, validasi form ketat, dan pelacakan status tanpa state keranjang yang tertukar.</p>
-                <p class="case-point"><strong>Pendekatan Teknis:</strong> Membangun arsitektur MVVM terpisah dengan 6 ViewModel khusus, StateFlow reaktif, serta NavHost dengan pengiriman argumen dinamis antar 15+ layar Compose.</p>
-                <p class="case-point"><strong>Implementasi Nyata:</strong> Sistem validasi input (Email, HP min. 10 digit, OTP 4 digit), tema Material 3 kustom, mockup pemindai QR meja, dan penerbitan struk digital.</p>
+                <p class="case-point" data-i18n-html="senoritaP1Html"><strong>Masalah:</strong> Pemesanan Dine-In dan Take Away membutuhkan alur pilih cabang, kustomisasi menu, validasi form ketat, dan pelacakan status tanpa state keranjang yang tertukar.</p>
+                <p class="case-point" data-i18n-html="senoritaP2Html"><strong>Pendekatan Teknis:</strong> Membangun arsitektur MVVM terpisah dengan 6 ViewModel khusus, StateFlow reaktif, serta NavHost dengan pengiriman argumen dinamis antar 15+ layar Compose.</p>
+                <p class="case-point" data-i18n-html="senoritaP3Html"><strong>Implementasi Nyata:</strong> Sistem validasi input (Email, HP min. 10 digit, OTP 4 digit), tema Material 3 kustom, mockup pemindai QR meja, dan penerbitan struk digital.</p>
               </div>
               <ul class="tech-tags" aria-label="Teknologi SENORITA">
                 <li>Kotlin</li>
@@ -405,12 +424,12 @@
                 <li>StateFlow</li>
                 <li>NavHost</li>
               </ul>
-              <a href="https://github.com/CryGord00/UTS-UAS-MAP-Mobile-Application-Programming-" target="_blank" rel="noopener noreferrer" class="case-link">Lihat Source Code &amp; Dokumentasi SENORITA</a>
+              <a href="https://github.com/CryGord00/UTS-UAS-MAP-Mobile-Application-Programming-" target="_blank" rel="noopener noreferrer" class="case-link" data-i18n="senoritaLink">Lihat Source Code &amp; Dokumentasi SENORITA</a>
             </div>
 
             <div class="case-study-visual" aria-label="Diagram arsitektur SENORITA">
               <div class="visual-head">
-                <p class="visual-caption">Arsitektur Lapisan</p>
+                <p class="visual-caption" data-i18n="senoritaArchCaption">Arsitektur Lapisan</p>
                 <span class="visual-meta">MVVM &middot; Compose</span>
               </div>
               <ol class="arch-stack">
@@ -421,7 +440,7 @@
                   <div class="arch-layer-body">
                     <div class="arch-layer-head">
                       <span class="arch-layer-name">Compose UI Layer</span>
-                      <span class="arch-layer-scope">15+ Layar</span>
+                      <span class="arch-layer-scope" data-i18n="senoritaLayer1Scope">15+ Layar</span>
                     </div>
                     <ul class="arch-tokens" aria-label="Layar Compose UI">
                       <li>MenuList</li>
@@ -440,7 +459,7 @@
                   <div class="arch-layer-body">
                     <div class="arch-layer-head">
                       <span class="arch-layer-name">ViewModel &amp; StateFlow</span>
-                      <span class="arch-layer-scope">6 ViewModel</span>
+                      <span class="arch-layer-scope" data-i18n="senoritaLayer2Scope">6 ViewModel</span>
                     </div>
                     <ul class="arch-tokens" aria-label="ViewModel state">
                       <li>Auth</li>
@@ -459,7 +478,7 @@
                   <div class="arch-layer-body">
                     <div class="arch-layer-head">
                       <span class="arch-layer-name">Repository &amp; Persistence</span>
-                      <span class="arch-layer-scope">Lokal</span>
+                      <span class="arch-layer-scope" data-i18n="senoritaLayer3Scope">Lokal</span>
                     </div>
                     <ul class="arch-tokens" aria-label="Komponen penyimpanan data">
                       <li>SenoritaRepository</li>
@@ -507,11 +526,11 @@
                 <span class="platform-label">Security Web App &middot; PhishGuard AI</span>
                 <span class="platform-label">Python &amp; HTML/CSS/JS</span>
               </div>
-              <h3 class="case-title">URL Phishing Detector</h3>
+              <h3 class="case-title" data-i18n="urlTitle">URL Phishing Detector</h3>
               <div class="case-breakdown">
-                <p class="case-point"><strong>Masalah:</strong> Tautan phishing kerap menyamarkan domain asli lewat panjang path, angka atau tanda hubung berlebih, hingga pemakaian alamat IP mentah untuk mengecoh pengguna.</p>
-                <p class="case-point"><strong>Pendekatan Teknis:</strong> Membangun backend Python (<code>ThreadingHTTPServer</code>) dengan endpoint <code>GET /api/health</code> dan <code>POST /api/predict</code> yang terhubung ke antarmuka web PhishGuard AI (HTML, CSS, JavaScript).</p>
-                <p class="case-point"><strong>Cakupan Fitur:</strong> Mengekstrak 8 fitur leksikal URL (<code>path_length</code>, <code>url_length</code>, <code>num_dots</code>, <code>num_hyphens</code>, <code>num_digits</code>, <code>has_https</code>, <code>has_ip</code>), pengecekan domain tepercaya, serta skor risiko dengan <em>lexical fallback</em> saat model Random Forest tidak dimuat.</p>
+                <p class="case-point" data-i18n-html="urlP1Html"><strong>Masalah:</strong> Tautan phishing kerap menyamarkan domain asli lewat panjang path, angka atau tanda hubung berlebih, hingga pemakaian alamat IP mentah untuk mengecoh pengguna.</p>
+                <p class="case-point" data-i18n-html="urlP2Html"><strong>Pendekatan Teknis:</strong> Membangun backend Python (<code>ThreadingHTTPServer</code>) dengan endpoint <code>GET /api/health</code> dan <code>POST /api/predict</code> yang terhubung ke antarmuka web PhishGuard AI (HTML, CSS, JavaScript).</p>
+                <p class="case-point" data-i18n-html="urlP3Html"><strong>Cakupan Fitur:</strong> Mengekstrak 8 fitur leksikal URL (<code>path_length</code>, <code>url_length</code>, <code>num_dots</code>, <code>num_hyphens</code>, <code>num_digits</code>, <code>has_https</code>, <code>has_ip</code>), pengecekan domain tepercaya, serta skor risiko dengan <em>lexical fallback</em> saat model Random Forest tidak dimuat.</p>
               </div>
               <ul class="tech-tags" aria-label="Teknologi URL Detector">
                 <li>Python</li>
@@ -521,8 +540,8 @@
                 <li>Lexical Analysis</li>
               </ul>
               <div class="case-link-row">
-                <a href="https://github.com/CryGord00/Computer-Securty-For-Hosting" target="_blank" rel="noopener noreferrer" class="case-link">Lihat Source Code URL Detector</a>
-                <a href="https://computer-securty.vercel.app" target="_blank" rel="noopener noreferrer" class="case-link">Buka Live Demo (Vercel)</a>
+                <a href="https://github.com/CryGord00/Computer-Securty-For-Hosting" target="_blank" rel="noopener noreferrer" class="case-link" data-i18n="urlLinkRepo">Lihat Source Code URL Detector</a>
+                <a href="https://computer-securty.vercel.app" target="_blank" rel="noopener noreferrer" class="case-link" data-i18n="urlLinkDemo">Buka Live Demo (Vercel)</a>
               </div>
             </div>
 
@@ -531,8 +550,8 @@
                 <img src="assets/project-url-detector.jpg" alt="Tampilan antarmuka PhishGuard AI pada URL Phishing Detector" width="1024" height="600" loading="lazy">
               </div>
               <div class="visual-head">
-                <p class="visual-caption">Bobot Fitur Deteksi</p>
-                <span class="visual-meta">Data Kode &middot; app.py</span>
+                <p class="visual-caption" data-i18n="urlVisualCaption">Bobot Fitur Deteksi</p>
+                <span class="visual-meta" data-i18n="urlVisualMeta">Data Kode &middot; app.py</span>
               </div>
               <ul class="weight-list">
                 <li class="weight-item">
@@ -581,11 +600,11 @@
                 <span class="platform-label">Web Game &middot; Team Fantastic 4</span>
                 <span class="platform-label">JavaScript / SPA</span>
               </div>
-              <h3 class="case-title">Fantasticpart2: Game Eksplorasi Kota Berbasis Web</h3>
+              <h3 class="case-title" data-i18n="fantasticTitle">Fantasticpart2: Game Eksplorasi Kota Berbasis Web</h3>
               <div class="case-breakdown">
-                <p class="case-point"><strong>Konsep:</strong> Project kolaborasi tim beranggotakan 4 pengembang (Team Fantastic 4) menghadirkan pemilihan karakter dengan kombinasi <em>weakness</em> dan <em>strength</em> unik untuk gaya bermain yang berbeda.</p>
-                <p class="case-point"><strong>Mekanik Permainan:</strong> Pemain menjelajahi berbagai kota sambil mengelola poin status bar yang berkurang sesuai aktivitas; pemain harus mengumpulkan seluruh item di semua kota sebelum salah satu status menyentuh <code>0</code> (<em>game over</em>).</p>
-                <p class="case-point"><strong>Implementasi &amp; Deploy:</strong> Dibangun sebagai aplikasi web SPA dengan JavaScript, CSS, dan HTML serta dikonfigurasi untuk deployment root SPA di Vercel.</p>
+                <p class="case-point" data-i18n-html="fantasticP1Html"><strong>Konsep:</strong> Project kolaborasi tim beranggotakan 4 pengembang (Team Fantastic 4) menghadirkan pemilihan karakter dengan kombinasi <em>weakness</em> dan <em>strength</em> unik untuk gaya bermain yang berbeda.</p>
+                <p class="case-point" data-i18n-html="fantasticP2Html"><strong>Mekanik Permainan:</strong> Pemain menjelajahi berbagai kota sambil mengelola poin status bar yang berkurang sesuai aktivitas; pemain harus mengumpulkan seluruh item di semua kota sebelum salah satu status menyentuh <code>0</code> (<em>game over</em>).</p>
+                <p class="case-point" data-i18n-html="fantasticP3Html"><strong>Implementasi &amp; Deploy:</strong> Dibangun sebagai aplikasi web SPA dengan JavaScript, CSS, dan HTML serta dikonfigurasi untuk deployment root SPA di Vercel.</p>
               </div>
               <ul class="tech-tags" aria-label="Teknologi Fantasticpart2">
                 <li>JavaScript</li>
@@ -595,8 +614,8 @@
                 <li>Vercel SPA</li>
               </ul>
               <div class="case-link-row">
-                <a href="https://github.com/Revlog15/Fantasticpart2" target="_blank" rel="noopener noreferrer" class="case-link">Lihat Repository GitHub</a>
-                <a href="https://fantasticpart2.vercel.app/login" target="_blank" rel="noopener noreferrer" class="case-link">Buka Live Demo (Vercel)</a>
+                <a href="https://github.com/Revlog15/Fantasticpart2" target="_blank" rel="noopener noreferrer" class="case-link" data-i18n="fantasticLinkRepo">Lihat Repository GitHub</a>
+                <a href="https://fantasticpart2.vercel.app/login" target="_blank" rel="noopener noreferrer" class="case-link" data-i18n="fantasticLinkDemo">Buka Live Demo (Vercel)</a>
               </div>
             </div>
 
@@ -605,8 +624,8 @@
                 <img src="assets/project-fantasticpart2.png" alt="Tampilan live demo halaman login Fantasticpart2" width="1280" height="800" loading="lazy">
               </div>
               <div class="visual-head">
-                <p class="visual-caption">Komposisi Bahasa Kode</p>
-                <span class="visual-meta">GitHub Repo &middot; 4 Kontributor</span>
+                <p class="visual-caption" data-i18n="fantasticVisualCaption">Komposisi Bahasa Kode</p>
+                <span class="visual-meta" data-i18n="fantasticVisualMeta">GitHub Repo &middot; 4 Kontributor</span>
               </div>
               <ul class="weight-list">
                 <li class="weight-item">
@@ -641,11 +660,11 @@
                 <span class="platform-label">Mobile App &middot; Expo / React Native</span>
                 <span class="platform-label">TypeScript / NativeWind</span>
               </div>
-              <h3 class="case-title">Hotel Booking &amp; Management: Aplikasi Reservasi Hotel</h3>
+              <h3 class="case-title" data-i18n="hotelTitle">Hotel Booking &amp; Management: Aplikasi Reservasi Hotel</h3>
               <div class="case-breakdown">
-                <p class="case-point"><strong>Konsep &amp; Peran:</strong> Project kolaborasi tim beranggotakan 6 pengembang yang membagi alur aplikasi ke tiga zona rute (<code>auth</code>, <code>guest</code>, dan <code>admin</code>) menggunakan navigasi berbasis berkas pada Expo Router.</p>
-                <p class="case-point"><strong>Fitur Utama:</strong> Alur autentikasi (<em>login</em> &amp; <em>register</em>), pencarian dan detail kamar, konfirmasi serta riwayat reservasi tamu, hingga dashboard admin untuk mengelola kamar, reservasi, dan pemindai (<code>expo-camera</code>).</p>
-                <p class="case-point"><strong>Arsitektur Teknis:</strong> Dibangun dengan TypeScript (98.2%), React Native (Expo 54), NativeWind/Tailwind CSS, pemisahan layanan API pada folder <code>services/</code> (<code>api</code>, <code>auth</code>, <code>hotel</code>, <code>booking</code>, <code>admin</code>), dan <code>AsyncStorage</code>.</p>
+                <p class="case-point" data-i18n-html="hotelP1Html"><strong>Konsep &amp; Peran:</strong> Project kolaborasi tim beranggotakan 6 pengembang yang membagi alur aplikasi ke tiga zona rute (<code>auth</code>, <code>guest</code>, dan <code>admin</code>) menggunakan navigasi berbasis berkas pada Expo Router.</p>
+                <p class="case-point" data-i18n-html="hotelP2Html"><strong>Fitur Utama:</strong> Alur autentikasi (<em>login</em> &amp; <em>register</em>), pencarian dan detail kamar, konfirmasi serta riwayat reservasi tamu, hingga dashboard admin untuk mengelola kamar, reservasi, dan pemindai (<code>expo-camera</code>).</p>
+                <p class="case-point" data-i18n-html="hotelP3Html"><strong>Arsitektur Teknis:</strong> Dibangun dengan TypeScript (98.2%), React Native (Expo 54), NativeWind/Tailwind CSS, pemisahan layanan API pada folder <code>services/</code> (<code>api</code>, <code>auth</code>, <code>hotel</code>, <code>booking</code>, <code>admin</code>), dan <code>AsyncStorage</code>.</p>
               </div>
               <ul class="tech-tags" aria-label="Teknologi Hotel Mobile App">
                 <li>Expo</li>
@@ -655,13 +674,13 @@
                 <li>NativeWind</li>
                 <li>expo-camera</li>
               </ul>
-              <a href="https://github.com/codezeros18/hotel" target="_blank" rel="noopener noreferrer" class="case-link">Lihat Repository GitHub</a>
+              <a href="https://github.com/codezeros18/hotel" target="_blank" rel="noopener noreferrer" class="case-link" data-i18n="hotelLinkRepo">Lihat Repository GitHub</a>
             </div>
 
             <div class="case-study-visual" aria-label="Komposisi kode Hotel Mobile App">
               <div class="visual-head">
-                <p class="visual-caption">Komposisi Bahasa Kode</p>
-                <span class="visual-meta">GitHub Repo &middot; 6 Kontributor</span>
+                <p class="visual-caption" data-i18n="hotelVisualCaption">Komposisi Bahasa Kode</p>
+                <span class="visual-meta" data-i18n="hotelVisualMeta">GitHub Repo &middot; 6 Kontributor</span>
               </div>
               <ul class="weight-list">
                 <li class="weight-item">
@@ -697,22 +716,22 @@
               <div class="case-meta-row">
                 <span class="platform-label">Game Dev / C#</span>
               </div>
-              <h3>Game Development &amp; Interactive Simulation</h3>
-              <p>Implementasi mekanik kontroler objek, manajemen state permainan, dan pola desain OOP menggunakan C# pada Unity Engine.</p>
+              <h3 data-i18n="gameTitle">Game Development &amp; Interactive Simulation</h3>
+              <p data-i18n="gameDesc">Implementasi mekanik kontroler objek, manajemen state permainan, dan pola desain OOP menggunakan C# pada Unity Engine.</p>
               <ul class="tech-tags" aria-label="Teknologi Game">
                 <li>C#</li>
                 <li>Unity Engine</li>
                 <li>OOP</li>
               </ul>
             </div>
-            <a href="https://github.com/CryGord00/Game_Developer-" target="_blank" rel="noopener noreferrer" class="case-link">Lihat Repository Game Dev</a>
+            <a href="https://github.com/CryGord00/Game_Developer-" target="_blank" rel="noopener noreferrer" class="case-link" data-i18n="gameLinkRepo">Lihat Repository Game Dev</a>
           </article>
         </div>
 
         <!-- Empty State (R-27) -->
         <div id="projectEmptyState" class="empty-state" hidden>
-          <p>Belum ada project yang cocok dengan kategori ini.</p>
-          <button id="resetFilterBtn" type="button" class="btn btn-secondary" style="margin-top: 12px;">Tampilkan Semua Project</button>
+          <p data-i18n="emptyStateText">Belum ada project yang cocok dengan kategori ini.</p>
+          <button id="resetFilterBtn" type="button" class="btn btn-secondary" style="margin-top: 12px;" data-i18n="emptyStateBtn">Tampilkan Semua Project</button>
         </div>
       </div>
     </section>
@@ -722,10 +741,10 @@
       <div class="container">
         <div class="section-editorial-head reveal-block">
           <div>
-            <p class="section-kicker">04 &middot; Kompetensi Teknis</p>
-            <h2 class="editorial-title">Tech <span class="editorial-italic">Stack.</span></h2>
+            <p class="section-kicker" data-i18n="stackKicker">04 &middot; Kompetensi Teknis</p>
+            <h2 class="editorial-title" data-i18n-html="stackTitleHtml">Tech <span class="editorial-italic">Stack.</span></h2>
           </div>
-          <p class="section-editorial-sub">Teknologi yang digunakan pada repository project mobile, web, backend, game, dan keamanan aplikasi.</p>
+          <p class="section-editorial-sub" data-i18n="stackSub">Teknologi yang digunakan pada repository project mobile, web, backend, game, dan keamanan aplikasi.</p>
         </div>
 
         <div class="stack-grid">
@@ -734,15 +753,15 @@
             <ul class="stack-items">
               <li>
                 <span class="stack-item-name">Kotlin &amp; Jetpack Compose</span>
-                <span class="stack-item-context">UI deklaratif Material 3, MVVM, StateFlow, dan navigasi layar (SENORITA)</span>
+                <span class="stack-item-context" data-i18n="stackCol1Item1Ctx">UI deklaratif Material 3, MVVM, StateFlow, dan navigasi layar (SENORITA)</span>
               </li>
               <li>
                 <span class="stack-item-name">React Native (Expo) &amp; TypeScript</span>
-                <span class="stack-item-context">Expo Router multi-zona, NativeWind, dan expo-camera (Hotel App)</span>
+                <span class="stack-item-context" data-i18n="stackCol1Item2Ctx">Expo Router multi-zona, NativeWind, dan expo-camera (Hotel App)</span>
               </li>
               <li>
                 <span class="stack-item-name">C# &amp; Unity Engine</span>
-                <span class="stack-item-context">Game 3D CharacterController, inventori ScriptableObject, dan OOP</span>
+                <span class="stack-item-context" data-i18n="stackCol1Item3Ctx">Game 3D CharacterController, inventori ScriptableObject, dan OOP</span>
               </li>
             </ul>
           </div>
@@ -752,15 +771,15 @@
             <ul class="stack-items">
               <li>
                 <span class="stack-item-name">React, JavaScript, HTML5 &amp; CSS3</span>
-                <span class="stack-item-context">Antarmuka web SPA interaktif, game browser, dan UI responsif</span>
+                <span class="stack-item-context" data-i18n="stackCol2Item1Ctx">Antarmuka web SPA interaktif, game browser, dan UI responsif</span>
               </li>
               <li>
                 <span class="stack-item-name">Python, Node.js &amp; RESTful API</span>
-                <span class="stack-item-context">Server ThreadingHTTPServer, layanan backend, dan endpoint JSON</span>
+                <span class="stack-item-context" data-i18n="stackCol2Item2Ctx">Server ThreadingHTTPServer, layanan backend, dan endpoint JSON</span>
               </li>
               <li>
                 <span class="stack-item-name">SQL (MySQL), MongoDB &amp; Supabase</span>
-                <span class="stack-item-context">Database relasional/NoSQL serta AsyncStorage dan SharedPreferences</span>
+                <span class="stack-item-context" data-i18n="stackCol2Item3Ctx">Database relasional/NoSQL serta AsyncStorage dan SharedPreferences</span>
               </li>
             </ul>
           </div>
@@ -770,15 +789,15 @@
             <ul class="stack-items">
               <li>
                 <span class="stack-item-name">URL Anomaly &amp; Phishing Detection</span>
-                <span class="stack-item-context">Ekstraksi 8 fitur leksikal URL, skor risiko, dan deteksi HTTPS/IP</span>
+                <span class="stack-item-context" data-i18n="stackCol3Item1Ctx">Ekstraksi 8 fitur leksikal URL, skor risiko, dan deteksi HTTPS/IP</span>
               </li>
               <li>
-                <span class="stack-item-name">Web Security &amp; Autentikasi</span>
-                <span class="stack-item-context">Validasi input ketat, pemisahan akses rute, dan dasar OWASP Top 10</span>
+                <span class="stack-item-name" data-i18n="stackCol3Item2Title">Web Security &amp; Autentikasi</span>
+                <span class="stack-item-context" data-i18n="stackCol3Item2Ctx">Validasi input ketat, pemisahan akses rute, dan dasar OWASP Top 10</span>
               </li>
               <li>
                 <span class="stack-item-name">Git, GitHub, Docker &amp; Vercel</span>
-                <span class="stack-item-context">Kolaborasi tim, kontainerisasi, troubleshooting Linux/Windows, dan deploy</span>
+                <span class="stack-item-context" data-i18n="stackCol3Item3Ctx">Kolaborasi tim, kontainerisasi, troubleshooting Linux/Windows, dan deploy</span>
               </li>
             </ul>
           </div>
@@ -791,29 +810,29 @@
       <div class="container">
         <div class="section-editorial-head reveal-block">
           <div>
-            <p class="section-kicker">05 &middot; Kolaborasi</p>
-            <h2 class="editorial-title">Kontak <span class="editorial-italic">&amp; Profil.</span></h2>
+            <p class="section-kicker" data-i18n="contactKicker">05 &middot; Kolaborasi</p>
+            <h2 class="editorial-title" data-i18n-html="contactTitleHtml">Kontak <span class="editorial-italic">&amp; Profil.</span></h2>
           </div>
-          <p class="section-editorial-sub">Hubungi untuk peluang magang, kolaborasi project, atau diskusi teknis.</p>
+          <p class="section-editorial-sub" data-i18n="contactSub">Hubungi untuk peluang magang, kolaborasi project, atau diskusi teknis.</p>
         </div>
 
         <div class="closing-grid reveal-block">
           <div class="edu-panel">
             <div>
-              <h3 class="panel-heading">Kolaborasi &amp; Rekrutmen</h3>
-              <p class="edu-focus">
+              <h3 class="panel-heading" data-i18n="contactLeftHeading">Kolaborasi &amp; Rekrutmen</h3>
+              <p class="edu-focus" data-i18n="contactLeftDesc">
                 Tertarik mendiskusikan kesempatan magang, posisi junior developer, atau meninjau detail teknis dari aplikasi SENORITA dan perangkat analisis keamanan? Silakan hubungi saya langsung melalui email, WhatsApp, atau tautan kontak di samping.
               </p>
             </div>
             <div class="contact-actions">
-              <a href="mailto:dimaspradhitya73@gmail.com" class="btn btn-primary">Kirim Email Langsung</a>
-              <a href="https://wa.me/6285162895078" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Chat WhatsApp</a>
+              <a href="mailto:dimaspradhitya73@gmail.com" class="btn btn-primary" data-i18n="contactBtnEmail">Kirim Email Langsung</a>
+              <a href="https://wa.me/6285162895078" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-i18n="contactBtnWa">Chat WhatsApp</a>
             </div>
           </div>
 
           <div class="contact-panel">
-            <h3 class="panel-heading">Tautan Langsung</h3>
-            <p class="section-subtitle" style="margin-bottom: 16px;">Saluran aktif untuk komunikasi dan peninjauan kode.</p>
+            <h3 class="panel-heading" data-i18n="contactRightHeading">Tautan Langsung</h3>
+            <p class="section-subtitle" style="margin-bottom: 16px;" data-i18n="contactRightSub">Saluran aktif untuk komunikasi dan peninjauan kode.</p>
             <ul class="contact-list">
               <li class="contact-row">
                 <span class="contact-label">GitHub</span>
@@ -845,7 +864,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>&copy; 2026 Dimas Pradhitya</p>
-      <a href="#top" class="footer-top-link">Kembali ke atas</a>
+      <a href="#top" class="footer-top-link" data-i18n="footerBackTop">Kembali ke atas</a>
     </div>
   </footer>
 
@@ -857,20 +876,21 @@
           <span id="certModalMeta" class="cert-modal-kicker">Sertifikat</span>
           <h3 id="certModalTitle" class="cert-modal-title">Pratinjau Sertifikat</h3>
         </div>
-        <button type="button" id="certModalClose" class="btn btn-secondary cert-modal-close" aria-label="Tutup pratinjau">Tutup</button>
+        <button type="button" id="certModalClose" class="btn btn-secondary cert-modal-close" aria-label="Tutup pratinjau" data-i18n="modalClose">Tutup</button>
       </div>
       <div id="certModalStage" class="cert-modal-stage"></div>
       <p id="certModalDesc" class="cert-modal-desc"></p>
     </div>
   </dialog>
 
-  <script src="js/ThemeController.js?v=20261117r" defer></script>
+  <script src="js/ThemeController.js?v=20261124b" defer></script>
   <script src="js/ScrollRevealManager.js?v=20261117r" defer></script>
-  <script src="js/ProjectFilterController.js?v=20261117r" defer></script>
-  <script src="js/NavigationController.js?v=20261117r" defer></script>
+  <script src="js/ProjectFilterController.js?v=20261124b" defer></script>
+  <script src="js/NavigationController.js?v=20261124b" defer></script>
   <script src="js/LanyardController.js?v=20261117r" defer></script>
   <script src="js/PageLoaderController.js?v=20261123c" defer></script>
-  <script src="js/ProfileWidgetsController.js?v=20261118a" defer></script>
-  <script src="script.js?v=20261117r" defer></script>
+  <script src="js/ProfileWidgetsController.js?v=20261124b" defer></script>
+  <script src="js/LanguageController.js?v=20261124b" defer></script>
+  <script src="script.js?v=20261124b" defer></script>
 </body>
 </html>

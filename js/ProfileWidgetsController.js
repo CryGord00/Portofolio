@@ -39,14 +39,15 @@
 
     openFromTrigger(btn) {
       this.lastTrigger = btn;
-      const category = btn.getAttribute('data-cert-category') || 'Sertifikat';
+      const isEn = document.documentElement.getAttribute('lang') === 'en';
+      const category = btn.getAttribute('data-cert-category') || (isEn ? 'Certificate' : 'Sertifikat');
       const index = btn.getAttribute('data-cert-index') || '';
-      const title = btn.getAttribute('data-cert-title') || 'Pratinjau Sertifikat';
+      const title = btn.getAttribute('data-cert-title') || (isEn ? 'Certificate Preview' : 'Pratinjau Sertifikat');
       const desc = btn.getAttribute('data-cert-desc') || '';
       const existingImg = btn.querySelector('img');
 
       if (this.metaEl) {
-        this.metaEl.textContent = index ? category + ' · Slot ' + index : category;
+        this.metaEl.textContent = index ? category + ' · ' + index : category;
       }
       if (this.titleEl) {
         this.titleEl.textContent = title;

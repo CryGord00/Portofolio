@@ -67,6 +67,16 @@
         triggerSelector: '.achievement-thumb'
       });
 
+      this.language = new Portfolio.LanguageController({
+        buttonId: 'langToggleBtn',
+        storageKey: 'portfolio-lang',
+        onLanguageChange: (lang) => {
+          this.theme.setLanguage(lang);
+          this.projectFilter.setLanguage(lang);
+          this.navigation.setLanguage(lang);
+        }
+      });
+
       this.modules = [
         this.theme,
         this.projectFilter,
@@ -75,7 +85,8 @@
         this.lanyard,
         this.loader,
         this.cvNotice,
-        this.certModal
+        this.certModal,
+        this.language
       ];
     }
 
