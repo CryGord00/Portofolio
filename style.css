@@ -1645,8 +1645,8 @@ html.is-preloading .lanyard-hint,
 /* 02. Achievements & Certifications Grid */
 .achievement-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .achievement-card {
