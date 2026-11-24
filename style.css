@@ -2752,15 +2752,25 @@ html.is-preloading .lanyard-hint,
     padding: 8px 12px 0;
   }
 
-  .header-inner {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .container.header-inner {
     padding: 5px 6px 5px 8px;
     gap: 6px;
     border-radius: var(--radius-pill);
   }
 
   .brand-link {
-    gap: 7px;
-    font-size: 0.82rem;
+    gap: 6px;
+    font-size: 0.8rem;
+  }
+
+  .brand-monogram {
+    width: 28px;
+    height: 28px;
   }
 
   .header-controls {
@@ -2776,14 +2786,14 @@ html.is-preloading .lanyard-hint,
   }
 
   .lang-toggle {
-    font-size: 0.72rem;
-    padding: 8px 8px;
-    gap: 3px;
+    font-size: 0.74rem;
+    padding: 8px 9px;
+    gap: 0;
   }
 
-  .container {
-    padding-left: 16px;
-    padding-right: 16px;
+  .lang-toggle .lang-sep,
+  .lang-toggle .lang-opt:not(.is-active) {
+    display: none;
   }
 
   .desktop-nav {
