@@ -49,12 +49,13 @@
       detailCampusLabel: 'Pengalaman Kampus',
       detailCampusValue: 'Project & Panitia UMN',
 
-      cvKicker: 'Curriculum Vitae · PDF',
+      cvKicker: 'Curriculum Vitae · PDF (ID / EN)',
       cvTitle: 'Curriculum Vitae Dimas Pradhitya',
       cvDesc:
-        'Ringkasan pendidikan, pengalaman kepanitiaan, project teknis, dan keahlian utama dalam format PDF siap baca maupun unduh.',
-      cvBtnOpen: 'Buka CV (PDF)',
+        'Tersedia versi Bahasa Indonesia dan Bahasa Inggris (ATS-friendly) dalam format PDF siap baca maupun unduh.',
+      cvBtnOpen: 'Buka CV (ID)',
       cvBtnDownload: 'Unduh PDF',
+      cvBtnAlt: 'CV (English)',
 
       orgKicker: '02 · Organisasi & Pengalaman Kampus',
       orgTitleHtml: 'Organisasi<span class="editorial-italic">.</span>',
@@ -214,12 +215,13 @@
       detailCampusLabel: 'Campus Activities',
       detailCampusValue: 'Projects & UMN Committees',
 
-      cvKicker: 'Curriculum Vitae · PDF',
+      cvKicker: 'Curriculum Vitae · PDF (EN / ID)',
       cvTitle: "Dimas Pradhitya's Curriculum Vitae",
       cvDesc:
-        'Overview of education, committee leadership, technical projects, and core skills in a ready-to-view and downloadable PDF format.',
-      cvBtnOpen: 'Open CV (PDF)',
+        'Available in both English (ATS-friendly) and Indonesian PDF versions, ready to view or download.',
+      cvBtnOpen: 'Open CV (EN)',
       cvBtnDownload: 'Download PDF',
+      cvBtnAlt: 'CV (Indonesian)',
 
       orgKicker: '02 · Campus Organizations & Leadership',
       orgTitleHtml: 'Organizations<span class="editorial-italic">.</span>',
@@ -387,6 +389,27 @@
       }
     }
 
+    syncCvLinks(lang) {
+      const openBtn = document.getElementById('cvOpenBtn');
+      const dlBtn = document.getElementById('cvDownloadBtn');
+      const altBtn = document.getElementById('cvAltBtn');
+      const isEn = lang === 'en';
+      const primaryHref = isEn
+        ? 'assets/cv-dimas-pradhitya-en.pdf?v=20261125a'
+        : 'assets/cv-dimas-pradhitya.pdf?v=20261123b';
+      const altHref = isEn
+        ? 'assets/cv-dimas-pradhitya.pdf?v=20261123b'
+        : 'assets/cv-dimas-pradhitya-en.pdf?v=20261125a';
+      const dlFilename = isEn ? 'CV-Dimas-Pradhitya-EN.pdf' : 'CV-Dimas-Pradhitya-ID.pdf';
+
+      if (openBtn) openBtn.setAttribute('href', primaryHref);
+      if (dlBtn) {
+        dlBtn.setAttribute('href', primaryHref);
+        dlBtn.setAttribute('download', dlFilename);
+      }
+      if (altBtn) altBtn.setAttribute('href', altHref);
+    }
+
     apply(lang) {
       const safeLang = lang === 'en' ? 'en' : 'id';
       const dict = TRANSLATIONS[safeLang];
@@ -413,6 +436,7 @@
       });
 
       this.syncCertificateAttributes(dict);
+      this.syncCvLinks(safeLang);
 
       if (this.button) {
         this.button.setAttribute('aria-label', dict.langSwitchAria);

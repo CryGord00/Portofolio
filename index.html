@@ -328,13 +328,14 @@
             <!-- Dedicated Web CV Slot -->
             <div id="cv-slot" class="cv-slot-card">
               <div class="cv-slot-copy">
-                <span class="cv-slot-kicker" data-i18n="cvKicker">Curriculum Vitae &middot; PDF</span>
+                <span class="cv-slot-kicker" data-i18n="cvKicker">Curriculum Vitae &middot; PDF (ID / EN)</span>
                 <p class="cv-slot-title" data-i18n="cvTitle">Curriculum Vitae Dimas Pradhitya</p>
-                <p class="cv-slot-desc" data-i18n="cvDesc">Ringkasan pendidikan, pengalaman kepanitiaan, project teknis, dan keahlian utama dalam format PDF siap baca maupun unduh.</p>
+                <p class="cv-slot-desc" data-i18n="cvDesc">Tersedia versi Bahasa Indonesia dan Bahasa Inggris (ATS-friendly) dalam format PDF siap baca maupun unduh.</p>
               </div>
               <div class="cv-slot-actions">
-                <a href="assets/cv-dimas-pradhitya.pdf?v=20261123b" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-i18n="cvBtnOpen">Buka CV (PDF)</a>
-                <a href="assets/cv-dimas-pradhitya.pdf?v=20261123b" download="CV-Dimas-Pradhitya.pdf" class="btn btn-secondary" data-i18n="cvBtnDownload">Unduh PDF</a>
+                <a id="cvOpenBtn" href="assets/cv-dimas-pradhitya.pdf?v=20261123b" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-i18n="cvBtnOpen">Buka CV (ID)</a>
+                <a id="cvDownloadBtn" href="assets/cv-dimas-pradhitya.pdf?v=20261123b" download="CV-Dimas-Pradhitya-ID.pdf" class="btn btn-secondary" data-i18n="cvBtnDownload">Unduh PDF</a>
+                <a id="cvAltBtn" href="assets/cv-dimas-pradhitya-en.pdf?v=20261125a" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-i18n="cvBtnAlt">CV (English)</a>
               </div>
             </div>
           </div>
@@ -890,7 +891,7 @@
   <script src="js/LanyardController.js?v=20261117r" defer></script>
   <script src="js/PageLoaderController.js?v=20261123c" defer></script>
   <script src="js/ProfileWidgetsController.js?v=20261124b" defer></script>
-  <script src="js/LanguageController.js?v=20261124b" defer></script>
+  <script src="js/LanguageController.js?v=20261125a" defer></script>
   <script src="script.js?v=20261124b" defer></script>
 </body>
 </html>
